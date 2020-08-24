@@ -1,0 +1,11 @@
+.toolbarTitle {
+  flex: 1;
+}
+.toolbarSecondary {
+  justify-content: space-between;
+  overflow-x: auto;
+}
+.toolbarLink {
+  padding: 10px;
+  flex-shrink: 0;
+}

@@ -1,0 +1,2 @@
+#!/bin/sh
+COMMAND=${@:-"yarn dev"} docker-compose -f docker-compose.yml run --service-ports --rm runner
