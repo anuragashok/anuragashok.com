@@ -1,16 +1,25 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 {
-	"name": "CustomDevContainer",
-	"image": "ghcr.io/anuragashok/devcontainer:main",
-	"remoteUser": "gitpod",
-	"postStartCommand": "yarn install",
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"terminal.integrated.fontFamily": "MesloLGS NF",
-				"typescript.tsdk": "node_modules/typescript/lib",
-  				"typescript.enablePromptUseWorkspaceTsdk": true
-			}
-		}
-	}
+  "name": "CustomDevContainer",
+  "image": "ghcr.io/anuragashok/devcontainer:main",
+  "remoteUser": "gitpod",
+  "postStartCommand": "yarn install",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.fontFamily": "MesloLGS NF",
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "editor.formatOnSave": true
+      },
+      "extensions": ["esbenp.prettier-vscode"]
+    }
+  }
 }
