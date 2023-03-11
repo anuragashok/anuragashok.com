@@ -3,12 +3,14 @@
 	"name": "CustomDevContainer",
 	"image": "ghcr.io/anuragashok/devcontainer:main",
 	"remoteUser": "gitpod",
-	"settings": {
-		"terminal.integrated.fontFamily": "MesloLGS NF"
-	},
+	"postStartCommand": "yarn install",
 	"customizations": {
 		"vscode": {
-
+			"settings": {
+				"terminal.integrated.fontFamily": "MesloLGS NF",
+				"typescript.tsdk": "node_modules/typescript/lib",
+  				"typescript.enablePromptUseWorkspaceTsdk": true
+			}
 		}
 	}
 }
