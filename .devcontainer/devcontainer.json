@@ -1,0 +1,14 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+{
+	"name": "CustomDevContainer",
+	"image": "ghcr.io/anuragashok/devcontainer:main",
+	"remoteUser": "gitpod",
+	"settings": {
+		"terminal.integrated.fontFamily": "MesloLGS NF"
+	},
+	"customizations": {
+		"vscode": {
+
+		}
+	}
+}
