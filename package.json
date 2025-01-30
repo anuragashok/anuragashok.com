@@ -47,6 +47,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.7",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.16.0",
     "@svgr/webpack": "^8.0.1",
