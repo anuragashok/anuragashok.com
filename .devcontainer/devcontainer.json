@@ -1,0 +1,13 @@
+{
+  "name": "Next.js Devcontainer",
+  "image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:0-20",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/zsh"
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ],
+  "postCreateCommand": "yarn install && yarn dev",
+  "remoteUser": "node"
+}
