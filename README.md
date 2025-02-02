@@ -14,11 +14,21 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://www.localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Using Devcontainer
+
+To use the devcontainer, follow these steps:
+
+1. Install [Visual Studio Code](https://code.visualstudio.com/).
+2. Install the [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in Visual Studio Code.
+3. Clone this repository.
+4. Open the repository in Visual Studio Code.
+5. When prompted, click "Reopen in Container" to start the devcontainer.
 
 ## Learn More
 
