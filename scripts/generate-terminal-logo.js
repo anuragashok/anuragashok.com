@@ -15,7 +15,7 @@ function generateTerminalLogo(width = 120, height = 120) {
   const circleColor = '#ee5c00'; // Vibrant orange for background
 
   // Add code editor tab background field (vertical rectangle with top-right cut corner)
-  const tabWidth = Math.floor(width * 0.7); // Tab width (70% of logo width)
+  const tabWidth = Math.floor(width * 0.63); // Tab width (63% of logo width, 10% thinner)
   const tabHeight = Math.floor(height * 0.8); // Tab height (80% of logo height)
   const tabX = (width - tabWidth) / 2;
   const tabY = (height - tabHeight) / 2;
@@ -38,7 +38,7 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('opacity', '0.9');
 
   // Add terminal text "aa;" - statement terminator aesthetic
-  const fontSize = Math.floor(width * 0.35);
+  const fontSize = Math.floor(width * 0.3); // Reduced font size for better proportions
   svg.ele('text')
     .att('x', width / 2)
     .att('y', height / 2 + fontSize * 0.1) // Adjust for tab centering
