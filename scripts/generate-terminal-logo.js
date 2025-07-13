@@ -25,7 +25,7 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('rx', '8')
     .att('ry', '8');
 
-  // Add terminal text "<aa/>" - self-closing tag aesthetic
+  // Add terminal text "aa;" - statement terminator aesthetic
   svg.ele('text')
     .att('x', width / 2)
     .att('y', height / 2 + Math.floor(width * 0.06)) // Better centering for larger text
@@ -34,7 +34,7 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('font-weight', 'bold')
     .att('text-anchor', 'middle')
     .att('fill', primaryColor)
-    .txt('<aa/>');
+    .txt('aa;');
 
   return svg.end({ prettyPrint: true });
 }
