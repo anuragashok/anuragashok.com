@@ -10,31 +10,30 @@
   --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-  /* Colors */
-  /* Copied from https://tailwindcss.com/docs/theme#default-theme-variable-reference */
-  --color-primary-50: oklch(0.971 0.014 343.198);
-  --color-primary-100: oklch(0.948 0.028 342.258);
-  --color-primary-200: oklch(0.899 0.061 343.231);
-  --color-primary-300: oklch(0.823 0.12 346.018);
-  --color-primary-400: oklch(0.718 0.202 349.761);
-  --color-primary-500: oklch(0.656 0.241 354.308);
-  --color-primary-600: oklch(0.592 0.249 0.584);
-  --color-primary-700: oklch(0.525 0.223 3.958);
-  --color-primary-800: oklch(0.459 0.187 3.815);
-  --color-primary-900: oklch(0.408 0.153 2.432);
-  --color-primary-950: oklch(0.284 0.109 3.907);
+  /* Colors - Mountain Meadow Green Theme */
+  --color-primary-50: oklch(98.33% 0.02 141.44deg);
+  --color-primary-100: oklch(96.24% 0.05 142.19deg);
+  --color-primary-200: oklch(92.47% 0.1 142.14deg);
+  --color-primary-300: oklch(87.2% 0.16 142.36deg);
+  --color-primary-400: oklch(79.23% 0.23 142.35deg);
+  --color-primary-500: oklch(72.29% 0.24 142.31deg);
+  --color-primary-600: oklch(62.83% 0.21 142.5deg);
+  --color-primary-700: oklch(52.63% 0.17 142.33deg);
+  --color-primary-800: oklch(44.72% 0.14 142.33deg);
+  --color-primary-900: oklch(39.45% 0.1 142.46deg);
+  --color-primary-950: oklch(26.58% 0.08 142.32deg);
 
-  --color-gray-50: oklch(0.985 0.002 247.839);
-  --color-gray-100: oklch(0.967 0.003 264.542);
-  --color-gray-200: oklch(0.928 0.006 264.531);
-  --color-gray-300: oklch(0.872 0.01 258.338);
-  --color-gray-400: oklch(0.707 0.022 261.325);
-  --color-gray-500: oklch(0.551 0.027 264.364);
-  --color-gray-600: oklch(0.446 0.03 256.802);
-  --color-gray-700: oklch(0.373 0.034 259.733);
-  --color-gray-800: oklch(0.278 0.033 256.848);
-  --color-gray-900: oklch(0.21 0.034 264.665);
-  --color-gray-950: oklch(0.13 0.028 261.692);
+  --color-gray-50: oklch(98.51% 0 none);
+  --color-gray-100: oklch(97.02% 0 none);
+  --color-gray-200: oklch(92.19% 0 none);
+  --color-gray-300: oklch(86.99% 0 none);
+  --color-gray-400: oklch(70.9% 0 none);
+  --color-gray-500: oklch(55.55% 0 none);
+  --color-gray-600: oklch(43.86% 0 none);
+  --color-gray-700: oklch(37.15% 0 none);
+  --color-gray-800: oklch(26.86% 0 none);
+  --color-gray-900: oklch(20.46% 0 none);
+  --color-gray-950: oklch(14.48% 0 none);
 
   /* Line heights */
   --line-height-11: 2.75rem;
