@@ -10,7 +10,17 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('viewBox', `0 0 ${width} ${height}`)
     .att('xmlns', 'http://www.w3.org/2000/svg');
 
-  // No background - transparent logo
+  // Add sleek border
+  svg.ele('rect')
+    .att('x', 2)
+    .att('y', 2)
+    .att('width', width - 4)
+    .att('height', height - 4)
+    .att('fill', 'none')
+    .att('stroke', '#22c55e')
+    .att('stroke-width', '2')
+    .att('rx', '8')
+    .att('ry', '8');
 
   // Add terminal text "aa_" - larger size, less background space
   svg.ele('text')
