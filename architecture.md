@@ -126,17 +126,18 @@ anuragashok.com/
 
 ## Current Theme
 
-- **Color Palette**: Tuscany theme using OKLCH color space with warm orange-brown tones
-- **Primary Colors**: Sophisticated Tuscany palette (50-950) with consistent warm hues for elegance
+- **Color Palette**: Vermilion theme using OKLCH color space with vibrant red-orange tones
+- **Primary Colors**: Bold Vermilion palette (50-950) with energetic warm hues for impact
 - **Typography**:
   - **Headings**: Tiro Tamil (serif) for distinctive character
   - **Body**: Noto Sans (sans-serif) for excellent readability
   - **Fallback**: Space Grotesk for system compatibility
 - **Dark Mode**: Automatic system preference detection with manual toggle
-- **Color Characteristics**: Warm orange-brown hues (~40-42°) with OKLCH precision for color harmony
+- **Color Characteristics**: Vibrant red-orange hues (~34-42°) with high chroma for energetic appeal
 - **Gray Palette**: OKLCH-based dove gray colors for consistent color science
 - **Border Radius**: Consistent 0.5rem radius for modern, rounded design elements
 - **Color Science**: OKLCH color space ensures perceptual uniformity and excellent accessibility
+- **Vibrancy**: Higher chroma values (up to 0.23) create bold, confident visual presence
 
 ## Performance Optimizations
 

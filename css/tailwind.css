@@ -12,18 +12,18 @@
   --font-heading: var(--font-tiro-tamil), serif;
   --font-body: var(--font-noto-sans), sans-serif;
 
-  /* Colors - Tuscany Theme */
-  --color-primary-50: oklch(97.93% 0.01 39.55deg);
-  --color-primary-100: oklch(95.33% 0.02 41.45deg);
-  --color-primary-200: oklch(90.21% 0.05 42.17deg);
-  --color-primary-300: oklch(83.77% 0.08 41.78deg);
-  --color-primary-400: oklch(74.85% 0.11 40.9deg);
-  --color-primary-500: oklch(70.5% 0.13 41.23deg);
-  --color-primary-600: oklch(61.34% 0.14 41.02deg);
-  --color-primary-700: oklch(55.33% 0.12 41.25deg);
-  --color-primary-800: oklch(47% 0.1 40.54deg);
-  --color-primary-900: oklch(40.82% 0.07 41.89deg);
-  --color-primary-950: oklch(26.55% 0.05 42.07deg);
+  /* Colors - Vermilion Theme */
+  --color-primary-50: oklch(97.46% 0.01 41.28deg);
+  --color-primary-100: oklch(94.71% 0.03 42.7deg);
+  --color-primary-200: oklch(88.54% 0.06 39.26deg);
+  --color-primary-300: oklch(81.26% 0.11 38.8deg);
+  --color-primary-400: oklch(72.68% 0.17 36.68deg);
+  --color-primary-500: oklch(68.43% 0.21 36.04deg);
+  --color-primary-600: oklch(66.02% 0.23 35.4deg);
+  --color-primary-700: oklch(55.34% 0.2 34.28deg);
+  --color-primary-800: oklch(47.09% 0.17 34.37deg);
+  --color-primary-900: oklch(40.77% 0.12 35.27deg);
+  --color-primary-950: oklch(26.56% 0.09 35.53deg);
 
   --color-gray-50: oklch(98.51% 0 none);
   --color-gray-100: oklch(97.02% 0 none);

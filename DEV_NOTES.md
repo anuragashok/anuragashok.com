@@ -301,4 +301,57 @@ The personal website scaffold is ready for development and customization! # Test
 
 ### Status: ✅ COMPLETED
 
+## Task: Update to Vermilion Theme with Vibrant Red-Orange Tones
+
+### Plan:
+
+1. ✅ Update the Tailwind CSS configuration to use the Vermilion color palette
+2. ✅ Maintain OKLCH format for consistent color science
+3. ✅ Test the new theme on both light and dark modes
+4. ✅ Commit the changes
+
+### Vermilion Theme Configuration:
+
+```css
+--color-vermilion-50: oklch(97.46% 0.01 41.28deg);
+--color-vermilion-100: oklch(94.71% 0.03 42.7deg);
+--color-vermilion-200: oklch(88.54% 0.06 39.26deg);
+--color-vermilion-300: oklch(81.26% 0.11 38.8deg);
+--color-vermilion-400: oklch(72.68% 0.17 36.68deg);
+--color-vermilion-500: oklch(68.43% 0.21 36.04deg);
+--color-vermilion-600: oklch(66.02% 0.23 35.4deg);
+--color-vermilion-700: oklch(55.34% 0.2 34.28deg);
+--color-vermilion-800: oklch(47.09% 0.17 34.37deg);
+--color-vermilion-900: oklch(40.77% 0.12 35.27deg);
+--color-vermilion-950: oklch(26.56% 0.09 35.53deg);
+
+--color-dove-gray-50: oklch(98.51% 0 none);
+--color-dove-gray-100: oklch(97.02% 0 none);
+--color-dove-gray-200: oklch(92.19% 0 none);
+--color-dove-gray-300: oklch(86.99% 0 none);
+--color-dove-gray-400: oklch(70.9% 0 none);
+--color-dove-gray-500: oklch(55.55% 0 none);
+--color-dove-gray-600: oklch(43.86% 0 none);
+--color-dove-gray-700: oklch(37.15% 0 none);
+--color-dove-gray-800: oklch(26.86% 0 none);
+--color-dove-gray-900: oklch(20.46% 0 none);
+--color-dove-gray-950: oklch(14.48% 0 none);
+
+--font-heading: 'Tiro Tamil', serif;
+--font-body: 'Noto Sans Elbasan', sans-serif;
+
+--radius: 0.5rem;
+```
+
+### Changes Made:
+
+- Updated `css/tailwind.css` with the Vermilion color palette (vibrant red-orange tones)
+- Maintained OKLCH color format for precise color science
+- Higher chroma values (up to 0.23) for more vibrant, energetic colors
+- Consistent hue around 34-42° for harmonious warm red-orange tones
+- Maintained custom typography (Tiro Tamil + Noto Sans)
+- Theme comment updated to "Vermilion Theme"
+
+### Status: ✅ COMPLETED
+
 ---
