@@ -14,13 +14,14 @@ function generateTerminalLogo(width = 120, height = 120) {
   const primaryColor = '#B8944A';
   const circleColor = '#ee5c00'; // Vibrant orange for background
 
-  // Add bracket background field
+  // Add bracket background field with spacing
   const bracketWidth = Math.floor(width * 0.08);
   const bracketHeight = Math.floor(height * 0.6);
   const bracketY = (height - bracketHeight) / 2;
-  const innerWidth = Math.floor(width * 0.5);
-  const leftBracketX = (width - innerWidth) / 2 - bracketWidth;
-  const rightBracketX = (width + innerWidth) / 2;
+  const spacing = Math.floor(width * 0.05); // Add spacing between brackets and text
+  const innerWidth = Math.floor(width * 0.4); // Reduce inner width to accommodate spacing
+  const leftBracketX = (width - innerWidth) / 2 - bracketWidth - spacing;
+  const rightBracketX = (width + innerWidth) / 2 + spacing;
 
   // Left bracket [
   svg.ele('rect')
