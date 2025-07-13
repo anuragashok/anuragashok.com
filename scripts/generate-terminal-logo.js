@@ -14,25 +14,69 @@ function generateTerminalLogo(width = 120, height = 120) {
   const primaryColor = '#B8944A';
   const circleColor = '#ee5c00'; // Vibrant orange for background
 
-  // Add circular background field
-  svg.ele('circle')
-    .att('cx', width / 2)
-    .att('cy', height / 2)
-    .att('r', Math.min(width, height) / 2 - 4) // Leave small margin
-    .att('fill', circleColor)
-    .att('opacity', '0.9');
+  // Add bracket background field
+  const bracketWidth = Math.floor(width * 0.08);
+  const bracketHeight = Math.floor(height * 0.6);
+  const bracketY = (height - bracketHeight) / 2;
+  const innerWidth = Math.floor(width * 0.5);
+  const leftBracketX = (width - innerWidth) / 2 - bracketWidth;
+  const rightBracketX = (width + innerWidth) / 2;
+
+  // Left bracket [
+  svg.ele('rect')
+    .att('x', leftBracketX)
+    .att('y', bracketY)
+    .att('width', bracketWidth)
+    .att('height', Math.floor(bracketHeight * 0.15))
+    .att('fill', circleColor);
+  
+  svg.ele('rect')
+    .att('x', leftBracketX)
+    .att('y', bracketY)
+    .att('width', Math.floor(bracketWidth * 0.4))
+    .att('height', bracketHeight)
+    .att('fill', circleColor);
+    
+  svg.ele('rect')
+    .att('x', leftBracketX)
+    .att('y', bracketY + bracketHeight - Math.floor(bracketHeight * 0.15))
+    .att('width', bracketWidth)
+    .att('height', Math.floor(bracketHeight * 0.15))
+    .att('fill', circleColor);
+
+  // Right bracket ]
+  svg.ele('rect')
+    .att('x', rightBracketX)
+    .att('y', bracketY)
+    .att('width', bracketWidth)
+    .att('height', Math.floor(bracketHeight * 0.15))
+    .att('fill', circleColor);
+    
+  svg.ele('rect')
+    .att('x', rightBracketX + bracketWidth - Math.floor(bracketWidth * 0.4))
+    .att('y', bracketY)
+    .att('width', Math.floor(bracketWidth * 0.4))
+    .att('height', bracketHeight)
+    .att('fill', circleColor);
+    
+  svg.ele('rect')
+    .att('x', rightBracketX)
+    .att('y', bracketY + bracketHeight - Math.floor(bracketHeight * 0.15))
+    .att('width', bracketWidth)
+    .att('height', Math.floor(bracketHeight * 0.15))
+    .att('fill', circleColor);
 
   // Add terminal text "aa;" - statement terminator aesthetic
   const fontSize = Math.floor(width * 0.35);
   svg.ele('text')
     .att('x', width / 2)
-    .att('y', height / 2 - fontSize * 0.1) // Move text up to visually center the characters
+    .att('y', height / 2 + fontSize * 0.1) // Adjust for bracket centering
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace")
     .att('font-size', fontSize)
     .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
-    .att('dominant-baseline', 'auto') // Use default baseline
-    .att('fill', '#ffffff') // White text for contrast against circle
+    .att('dominant-baseline', 'middle') // Center in brackets
+    .att('fill', circleColor) // Use same color as brackets for cohesion
     .txt('aa;');
 
   return svg.end({ prettyPrint: true });
