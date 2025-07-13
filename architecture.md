@@ -126,10 +126,11 @@ anuragashok.com/
 
 ## Current Theme
 
-- **Color Palette**: Cyan theme using OKLCH color space
-- **Primary Colors**: Modern cyan palette (50-950) with excellent contrast ratios
+- **Color Palette**: Refined cyan theme using OKLCH color space
+- **Primary Colors**: Modern cyan palette (50-950) with consistent hue and excellent contrast ratios
 - **Typography**: Space Grotesk font family
 - **Dark Mode**: Automatic system preference detection with manual toggle
+- **Color Characteristics**: Consistent hue (~195°) across all shades for visual harmony
 
 ## Performance Optimizations
 
