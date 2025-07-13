@@ -10,8 +10,8 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('viewBox', `0 0 ${width} ${height}`)
     .att('xmlns', 'http://www.w3.org/2000/svg');
 
-  // Define primary-600 color (Claret)
-  const primaryColor = '#8B4A42';
+  // Define primary-600 color (Chardonnay)
+  const primaryColor = '#B8944A';
   const circleColor = '#dc285d'; // Vibrant pink/magenta for background
 
   // Add circular background field
