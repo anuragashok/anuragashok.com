@@ -77,3 +77,38 @@
 ### Status: ✅ COMPLETED
 
 The personal website scaffold is ready for development and customization! # Test
+
+## Task: Change Theme to Cyan Color Palette
+
+### Plan:
+
+1. ✅ Update the Tailwind CSS configuration to use the new cyan color palette
+2. ✅ Update any hardcoded color references in components
+3. ✅ Test the new theme on both light and dark modes
+4. ✅ Commit the changes
+
+### Cyan Color Palette (OKLCH):
+
+```css
+--color-cyan-50: oklch(95.65% 0.021 274.08);
+--color-cyan-100: oklch(92.38% 0.036 272.09);
+--color-cyan-200: oklch(83.76% 0.08 269.81);
+--color-cyan-300: oklch(76.15% 0.121 266.46);
+--color-cyan-400: oklch(68.61% 0.165 261.43);
+--color-cyan-500: oklch(59.95% 0.203 255.78);
+--color-cyan-600: oklch(52.19% 0.177 255.83);
+--color-cyan-700: oklch(42.6% 0.144 255.8);
+--color-cyan-800: oklch(32.91% 0.113 256.06);
+--color-cyan-900: oklch(23.53% 0.079 255.47);
+--color-cyan-950: oklch(19% 0.063 255.24);
+```
+
+### Changes Made:
+
+- Updated `css/tailwind.css` to replace the Chardonnay theme colors with the new cyan palette
+- All primary color variables now use the cyan OKLCH values
+- Theme comment updated from "Chardonnay Theme" to "Cyan Theme"
+
+### Status: ✅ COMPLETED
+
+---
