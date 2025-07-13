@@ -58,21 +58,55 @@ function generateTerminalLogo(width = 120, height = 120) {
   return svg.end({ prettyPrint: true })
 }
 
+function generateFaviconLogo(width = 32, height = 32) {
+  // Create SVG document for simplified favicon
+  const svg = create({ version: '1.0', encoding: 'UTF-8' })
+    .ele('svg')
+    .att('width', width)
+    .att('height', height)
+    .att('viewBox', `0 0 ${width} ${height}`)
+    .att('xmlns', 'http://www.w3.org/2000/svg')
+
+  const orangeColor = '#FF4500' // OrangeRed color
+
+  // Add just the "aa;" text in orange color, no background
+  const fontSize = Math.floor(width * 0.5) // Larger font size for favicon
+  svg
+    .ele('text')
+    .att('x', width / 2)
+    .att('y', height / 2)
+    .att(
+      'font-family',
+      "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace"
+    )
+    .att('font-size', fontSize)
+    .att('font-weight', '600') // Bold weight for better visibility at small sizes
+    .att('text-anchor', 'middle')
+    .att('dominant-baseline', 'middle')
+    .att('fill', orangeColor) // Orange text, no background
+    .txt('aa;')
+
+  return svg.end({ prettyPrint: true })
+}
+
 // Generate different sizes including favicons
-const sizes = [
-  { name: 'logo.svg', size: 120, path: 'data' },
-  { name: 'logo-large.svg', size: 400, path: 'public/static/images' },
-  { name: 'logo-small.svg', size: 64, path: 'public/static/images' },
-  // Favicon sizes
-  { name: 'favicon.svg', size: 32, path: 'public/static/favicons' },
-  { name: 'apple-touch-icon.svg', size: 180, path: 'public/static/favicons' },
-  { name: 'favicon-16x16.svg', size: 16, path: 'public/static/favicons' },
-  { name: 'favicon-32x32.svg', size: 32, path: 'public/static/favicons' },
-  { name: 'android-chrome-192x192.svg', size: 192, path: 'public/static/favicons' },
-  { name: 'android-chrome-512x512.svg', size: 512, path: 'public/static/favicons' },
+const logoSizes = [
+  { name: 'logo.svg', size: 120, path: 'data', type: 'logo' },
+  { name: 'logo-large.svg', size: 400, path: 'public/static/images', type: 'logo' },
+  { name: 'logo-small.svg', size: 64, path: 'public/static/images', type: 'logo' },
+  { name: 'apple-touch-icon.svg', size: 180, path: 'public/static/favicons', type: 'logo' },
+  { name: 'android-chrome-192x192.svg', size: 192, path: 'public/static/favicons', type: 'logo' },
+  { name: 'android-chrome-512x512.svg', size: 512, path: 'public/static/favicons', type: 'logo' },
 ]
 
-sizes.forEach(({ name, size, path }) => {
+const faviconSizes = [
+  { name: 'favicon.svg', size: 32, path: 'public/static/favicons', type: 'favicon' },
+  { name: 'favicon-16x16.svg', size: 16, path: 'public/static/favicons', type: 'favicon' },
+  { name: 'favicon-32x32.svg', size: 32, path: 'public/static/favicons', type: 'favicon' },
+]
+
+// Generate logos with background
+logoSizes.forEach(({ name, size, path }) => {
   const logoSVG = generateTerminalLogo(size, size)
   const filePath = `${path}/${name}`
 
@@ -86,10 +120,25 @@ sizes.forEach(({ name, size, path }) => {
   console.log(`✅ Generated: ${filePath} (${size}x${size})`)
 })
 
+// Generate simplified favicons with just text
+faviconSizes.forEach(({ name, size, path }) => {
+  const faviconSVG = generateFaviconLogo(size, size)
+  const filePath = `${path}/${name}`
+
+  // Ensure directory exists
+  const dir = path
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
+
+  fs.writeFileSync(filePath, faviconSVG)
+  console.log(`🔖 Generated favicon: ${filePath} (${size}x${size})`)
+})
+
 console.log('\n🎯 Terminal-style logo and favicons generated successfully!')
 console.log('📁 Main logo: data/logo.svg')
 console.log('📁 Large version: public/static/images/logo-large.svg')
 console.log('📁 Small version: public/static/images/logo-small.svg')
-console.log('🔖 Favicons: public/static/favicons/ (multiple sizes)')
+console.log('🔖 Simplified favicons: public/static/favicons/favicon*.svg (orange "aa;" text only)')
 console.log('📱 Apple touch icon: public/static/favicons/apple-touch-icon.svg')
 console.log('🤖 Android icons: public/static/favicons/android-chrome-*.svg')
