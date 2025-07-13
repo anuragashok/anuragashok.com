@@ -248,4 +248,57 @@ The personal website scaffold is ready for development and customization! # Test
 
 ### Status: ✅ COMPLETED
 
+## Task: Update to Tuscany Theme with OKLCH Colors
+
+### Plan:
+
+1. ✅ Update the Tailwind CSS configuration to use the Tuscany color palette
+2. ✅ Convert gray colors back to OKLCH format for consistency
+3. ✅ Test the new theme on both light and dark modes
+4. ✅ Commit the changes
+
+### Tuscany Theme Configuration:
+
+```css
+--color-tuscany-50: oklch(97.93% 0.01 39.55deg);
+--color-tuscany-100: oklch(95.33% 0.02 41.45deg);
+--color-tuscany-200: oklch(90.21% 0.05 42.17deg);
+--color-tuscany-300: oklch(83.77% 0.08 41.78deg);
+--color-tuscany-400: oklch(74.85% 0.11 40.9deg);
+--color-tuscany-500: oklch(70.5% 0.13 41.23deg);
+--color-tuscany-600: oklch(61.34% 0.14 41.02deg);
+--color-tuscany-700: oklch(55.33% 0.12 41.25deg);
+--color-tuscany-800: oklch(47% 0.1 40.54deg);
+--color-tuscany-900: oklch(40.82% 0.07 41.89deg);
+--color-tuscany-950: oklch(26.55% 0.05 42.07deg);
+
+--color-dove-gray-50: oklch(98.51% 0 none);
+--color-dove-gray-100: oklch(97.02% 0 none);
+--color-dove-gray-200: oklch(92.19% 0 none);
+--color-dove-gray-300: oklch(86.99% 0 none);
+--color-dove-gray-400: oklch(70.9% 0 none);
+--color-dove-gray-500: oklch(55.55% 0 none);
+--color-dove-gray-600: oklch(43.86% 0 none);
+--color-dove-gray-700: oklch(37.15% 0 none);
+--color-dove-gray-800: oklch(26.86% 0 none);
+--color-dove-gray-900: oklch(20.46% 0 none);
+--color-dove-gray-950: oklch(14.48% 0 none);
+
+--font-heading: 'Tiro Tamil', serif;
+--font-body: 'Noto Sans Elbasan', sans-serif;
+
+--radius: 0.5rem;
+```
+
+### Changes Made:
+
+- Updated `css/tailwind.css` with the Tuscany color palette (warm orange-brown tones)
+- Converted back to OKLCH color format for consistent color science
+- Updated gray colors back to OKLCH format for consistency
+- Maintained custom typography (Tiro Tamil + Noto Sans)
+- Theme comment updated to "Tuscany Theme"
+- Consistent hue around 40-42° for harmonious warm tones
+
+### Status: ✅ COMPLETED
+
 ---
