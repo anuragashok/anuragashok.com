@@ -14,19 +14,20 @@ function generateTerminalLogo(width = 120, height = 120) {
   const primaryColor = '#B8944A';
   const circleColor = '#ee5c00'; // Vibrant orange for background
 
-  // Add code editor tab background field (square with top-right cut corner)
-  const tabSize = Math.min(width, height) - 8; // Leave margin
-  const tabX = (width - tabSize) / 2;
-  const tabY = (height - tabSize) / 2;
-  const cutSize = Math.floor(tabSize * 0.2); // Size of top-right corner cut
+  // Add code editor tab background field (vertical rectangle with top-right cut corner)
+  const tabWidth = Math.floor(width * 0.7); // Tab width (70% of logo width)
+  const tabHeight = Math.floor(height * 0.8); // Tab height (80% of logo height)
+  const tabX = (width - tabWidth) / 2;
+  const tabY = (height - tabHeight) / 2;
+  const cutSize = Math.floor(tabWidth * 0.25); // Size of top-right corner cut
   
-  // Create square with single top-right cut corner (code editor tab shape)
+  // Create vertical rectangle with single top-right cut corner (code editor tab shape)
   const tabPoints = [
     `${tabX},${tabY}`, // Top left
-    `${tabX + tabSize - cutSize},${tabY}`, // Top right before cut
-    `${tabX + tabSize},${tabY + cutSize}`, // Top right after cut (angled)
-    `${tabX + tabSize},${tabY + tabSize}`, // Bottom right
-    `${tabX},${tabY + tabSize}`, // Bottom left
+    `${tabX + tabWidth - cutSize},${tabY}`, // Top right before cut
+    `${tabX + tabWidth},${tabY + cutSize}`, // Top right after cut (angled)
+    `${tabX + tabWidth},${tabY + tabHeight}`, // Bottom right
+    `${tabX},${tabY + tabHeight}`, // Bottom left
     `${tabX},${tabY}` // Back to top left
   ];
   
