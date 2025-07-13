@@ -12,7 +12,7 @@ function generateTerminalLogo(width = 120, height = 120) {
 
   // Define primary-600 color (Claret)
   const primaryColor = '#8B4A42';
-  const circleColor = '#A0574D'; // Slightly lighter claret for background
+  const circleColor = '#dc285d'; // Vibrant pink/magenta for background
 
   // Add circular background field
   svg.ele('circle')
