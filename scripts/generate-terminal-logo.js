@@ -26,12 +26,12 @@ function generateTerminalLogo(width = 120, height = 120) {
   const fontSize = Math.floor(width * 0.35);
   svg.ele('text')
     .att('x', width / 2)
-    .att('y', height / 2 + fontSize * 0.1) // Manual vertical centering adjustment
+    .att('y', height / 2 + fontSize * 0.35) // Adjusted for better vertical centering
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace")
     .att('font-size', fontSize)
     .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
-    .att('dominant-baseline', 'middle') // Use middle instead of central
+    .att('dominant-baseline', 'auto') // Let SVG handle baseline naturally
     .att('fill', '#ffffff') // White text for contrast against circle
     .txt('aa;');
 
