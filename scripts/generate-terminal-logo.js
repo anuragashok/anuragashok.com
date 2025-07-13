@@ -23,14 +23,15 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('opacity', '0.9');
 
   // Add terminal text "aa;" - statement terminator aesthetic
+  const fontSize = Math.floor(width * 0.35);
   svg.ele('text')
     .att('x', width / 2)
-    .att('y', height / 2)
+    .att('y', height / 2 + fontSize * 0.1) // Manual vertical centering adjustment
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace")
-    .att('font-size', Math.floor(width * 0.35)) // Increased from 0.2 to 0.35 for larger text
+    .att('font-size', fontSize)
     .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
-    .att('dominant-baseline', 'central') // Perfect vertical centering
+    .att('dominant-baseline', 'middle') // Use middle instead of central
     .att('fill', '#ffffff') // White text for contrast against circle
     .txt('aa;');
 
