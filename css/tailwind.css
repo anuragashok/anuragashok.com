@@ -12,30 +12,30 @@
   --font-heading: var(--font-tiro-tamil), serif;
   --font-body: var(--font-noto-sans), sans-serif;
 
-  /* Colors - Casper Theme */
-  --color-primary-50: oklch(98.41% 0.01 219.38deg);
-  --color-primary-100: oklch(96.75% 0.01 225.89deg);
-  --color-primary-200: oklch(92.92% 0.02 220.81deg);
-  --color-primary-300: oklch(79.57% 0.04 223.96deg);
-  --color-primary-400: oklch(70.42% 0.07 223.92deg);
-  --color-primary-500: oklch(55.29% 0.08 224.36deg);
-  --color-primary-600: oklch(44.45% 0.07 223.99deg);
-  --color-primary-700: oklch(37.38% 0.07 225.3deg);
-  --color-primary-800: oklch(28.58% 0.06 230.13deg);
-  --color-primary-900: oklch(21.97% 0.05 239.45deg);
-  --color-primary-950: oklch(14.4% 0.04 251.92deg);
+  /* Colors - Shingle Fawn Theme */
+  --color-primary-50: #fffaed;
+  --color-primary-100: #fff5d9;
+  --color-primary-200: #ffeab0;
+  --color-primary-300: #ffdb89;
+  --color-primary-400: #f1c96c;
+  --color-primary-500: #dcb764;
+  --color-primary-600: #b3944d;
+  --color-primary-700: #876f37;
+  --color-primary-800: #725e30;
+  --color-primary-900: #5a4b29;
+  --color-primary-950: #332910;
 
-  --color-gray-50: oklch(98.51% 0 none);
-  --color-gray-100: oklch(97.02% 0 none);
-  --color-gray-200: oklch(92.19% 0 none);
-  --color-gray-300: oklch(86.99% 0 none);
-  --color-gray-400: oklch(70.9% 0 none);
-  --color-gray-500: oklch(55.55% 0 none);
-  --color-gray-600: oklch(43.86% 0 none);
-  --color-gray-700: oklch(37.15% 0 none);
-  --color-gray-800: oklch(26.86% 0 none);
-  --color-gray-900: oklch(20.46% 0 none);
-  --color-gray-950: oklch(14.48% 0 none);
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a1a1a1;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+  --color-gray-950: #0a0a0a;
 
   /* Border radius */
   --radius: 0.5rem;

@@ -126,14 +126,15 @@ anuragashok.com/
 
 ## Current Theme
 
-- **Color Palette**: Casper theme using OKLCH color space with subtle blue-gray tones
-- **Primary Colors**: Sophisticated Casper palette (50-950) with minimal saturation for elegance
+- **Color Palette**: Shingle Fawn theme using hex color values with warm, earthy tones
+- **Primary Colors**: Natural Shingle Fawn palette (50-950) with golden-brown hues for warmth
 - **Typography**:
   - **Headings**: Tiro Tamil (serif) for distinctive character
   - **Body**: Noto Sans (sans-serif) for excellent readability
   - **Fallback**: Space Grotesk for system compatibility
 - **Dark Mode**: Automatic system preference detection with manual toggle
-- **Color Characteristics**: Subtle blue-gray hues (~220°) with very low saturation for refined appearance
+- **Color Characteristics**: Warm golden-brown tones creating an inviting, natural aesthetic
+- **Gray Palette**: Standard hex-based dove gray colors for improved compatibility
 - **Border Radius**: Consistent 0.5rem radius for modern, rounded design elements
 
 ## Performance Optimizations

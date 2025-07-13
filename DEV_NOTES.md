@@ -196,4 +196,56 @@ The personal website scaffold is ready for development and customization! # Test
 
 ### Status: ✅ COMPLETED
 
+## Task: Update to Shingle Fawn Theme
+
+### Plan:
+
+1. ✅ Update the Tailwind CSS configuration to use the Shingle Fawn color palette
+2. ✅ Update the gray colors to standard hex values
+3. ✅ Test the new theme on both light and dark modes
+4. ✅ Commit the changes
+
+### Shingle Fawn Theme Configuration:
+
+```css
+--color-shingle-fawn-50: #fffaed;
+--color-shingle-fawn-100: #fff5d9;
+--color-shingle-fawn-200: #ffeab0;
+--color-shingle-fawn-300: #ffdb89;
+--color-shingle-fawn-400: #f1c96c;
+--color-shingle-fawn-500: #dcb764;
+--color-shingle-fawn-600: #b3944d;
+--color-shingle-fawn-700: #876f37;
+--color-shingle-fawn-800: #725e30;
+--color-shingle-fawn-900: #5a4b29;
+--color-shingle-fawn-950: #332910;
+
+--color-dove-gray-50: #fafafa;
+--color-dove-gray-100: #f5f5f5;
+--color-dove-gray-200: #e5e5e5;
+--color-dove-gray-300: #d4d4d4;
+--color-dove-gray-400: #a1a1a1;
+--color-dove-gray-500: #737373;
+--color-dove-gray-600: #525252;
+--color-dove-gray-700: #404040;
+--color-dove-gray-800: #262626;
+--color-dove-gray-900: #171717;
+--color-dove-gray-950: #0a0a0a;
+
+--font-heading: 'Tiro Tamil', serif;
+--font-body: 'Noto Sans Elbasan', sans-serif;
+
+--radius: 0.5rem;
+```
+
+### Changes Made:
+
+- Updated `css/tailwind.css` with the Shingle Fawn color palette (warm, earthy tones)
+- Converted from OKLCH to hex color format for better compatibility
+- Updated gray colors to standard hex values with improved contrast
+- Maintained custom typography (Tiro Tamil + Noto Sans)
+- Theme comment updated to "Shingle Fawn Theme"
+
+### Status: ✅ COMPLETED
+
 ---
