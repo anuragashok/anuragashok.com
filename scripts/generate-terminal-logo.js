@@ -10,6 +10,9 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('viewBox', `0 0 ${width} ${height}`)
     .att('xmlns', 'http://www.w3.org/2000/svg');
 
+  // Define primary-600 color (converted from oklch(0.592 0.249 0.584))
+  const primaryColor = '#715bff';
+
   // Add sleek border
   svg.ele('rect')
     .att('x', 2)
@@ -17,7 +20,7 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('width', width - 4)
     .att('height', height - 4)
     .att('fill', 'none')
-    .att('stroke', '#22c55e')
+    .att('stroke', primaryColor)
     .att('stroke-width', '2')
     .att('rx', '8')
     .att('ry', '8');
@@ -30,7 +33,7 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('font-size', Math.floor(width * 0.35)) // Increased from 0.2 to 0.35 for larger text
     .att('font-weight', 'bold')
     .att('text-anchor', 'middle')
-    .att('fill', '#22c55e')
+    .att('fill', primaryColor)
     .txt('aa_');
 
   return svg.end({ prettyPrint: true });
