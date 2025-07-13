@@ -12,7 +12,7 @@ function generateTerminalLogo(width = 120, height = 120) {
 
   // Define primary-600 color (Chardonnay)
   const primaryColor = '#B8944A';
-  const circleColor = '#dc285d'; // Vibrant pink/magenta for background
+  const circleColor = '#ee5c00'; // Vibrant orange for background
 
   // Add circular background field
   svg.ele('circle')
