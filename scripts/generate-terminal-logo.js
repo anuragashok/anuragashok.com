@@ -14,70 +14,37 @@ function generateTerminalLogo(width = 120, height = 120) {
   const primaryColor = '#B8944A';
   const circleColor = '#ee5c00'; // Vibrant orange for background
 
-  // Add bracket background field with spacing
-  const bracketWidth = Math.floor(width * 0.08);
-  const bracketHeight = Math.floor(height * 0.6);
-  const bracketY = (height - bracketHeight) / 2;
-  const spacing = Math.floor(width * 0.05); // Add spacing between brackets and text
-  const innerWidth = Math.floor(width * 0.4); // Reduce inner width to accommodate spacing
-  const leftBracketX = (width - innerWidth) / 2 - bracketWidth - spacing;
-  const rightBracketX = (width + innerWidth) / 2 + spacing;
-
-  // Left bracket [
-  svg.ele('rect')
-    .att('x', leftBracketX)
-    .att('y', bracketY)
-    .att('width', bracketWidth)
-    .att('height', Math.floor(bracketHeight * 0.15))
-    .att('fill', circleColor);
+  // Add hexagon background field
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const radius = Math.min(width, height) / 2 - 4; // Leave small margin
   
-  svg.ele('rect')
-    .att('x', leftBracketX)
-    .att('y', bracketY)
-    .att('width', Math.floor(bracketWidth * 0.4))
-    .att('height', bracketHeight)
-    .att('fill', circleColor);
-    
-  svg.ele('rect')
-    .att('x', leftBracketX)
-    .att('y', bracketY + bracketHeight - Math.floor(bracketHeight * 0.15))
-    .att('width', bracketWidth)
-    .att('height', Math.floor(bracketHeight * 0.15))
-    .att('fill', circleColor);
-
-  // Right bracket ]
-  svg.ele('rect')
-    .att('x', rightBracketX)
-    .att('y', bracketY)
-    .att('width', bracketWidth)
-    .att('height', Math.floor(bracketHeight * 0.15))
-    .att('fill', circleColor);
-    
-  svg.ele('rect')
-    .att('x', rightBracketX + bracketWidth - Math.floor(bracketWidth * 0.4))
-    .att('y', bracketY)
-    .att('width', Math.floor(bracketWidth * 0.4))
-    .att('height', bracketHeight)
-    .att('fill', circleColor);
-    
-  svg.ele('rect')
-    .att('x', rightBracketX)
-    .att('y', bracketY + bracketHeight - Math.floor(bracketHeight * 0.15))
-    .att('width', bracketWidth)
-    .att('height', Math.floor(bracketHeight * 0.15))
-    .att('fill', circleColor);
+  // Calculate hexagon points
+  const points = [];
+  for (let i = 0; i < 6; i++) {
+    const angle = (i * Math.PI) / 3; // 60 degrees between points
+    const x = centerX + radius * Math.cos(angle);
+    const y = centerY + radius * Math.sin(angle);
+    points.push(`${x},${y}`);
+  }
+  
+  // Create hexagon
+  svg.ele('polygon')
+    .att('points', points.join(' '))
+    .att('fill', circleColor)
+    .att('opacity', '0.9');
 
   // Add terminal text "aa;" - statement terminator aesthetic
   const fontSize = Math.floor(width * 0.35);
   svg.ele('text')
     .att('x', width / 2)
-    .att('y', height / 2 + fontSize * 0.1) // Adjust for bracket centering
+    .att('y', height / 2 + fontSize * 0.1) // Adjust for hexagon centering
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace")
     .att('font-size', fontSize)
     .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
-    .att('dominant-baseline', 'middle') // Center in brackets
-    .att('fill', circleColor) // Use same color as brackets for cohesion
+    .att('dominant-baseline', 'middle') // Center in hexagon
+    .att('fill', '#ffffff') // White text for contrast against hexagon
     .txt('aa;');
 
   return svg.end({ prettyPrint: true });
