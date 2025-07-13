@@ -14,23 +14,27 @@ function generateTerminalLogo(width = 120, height = 120) {
   const primaryColor = '#B8944A';
   const circleColor = '#ee5c00'; // Vibrant orange for background
 
-  // Add hexagon background field
-  const centerX = width / 2;
-  const centerY = height / 2;
-  const radius = Math.min(width, height) / 2 - 4; // Leave small margin
+  // Add microchip/circuit board background field (square with cut corners)
+  const chipSize = Math.min(width, height) - 8; // Leave margin
+  const chipX = (width - chipSize) / 2;
+  const chipY = (height - chipSize) / 2;
+  const cutSize = Math.floor(chipSize * 0.15); // Size of corner cuts
   
-  // Calculate hexagon points
-  const points = [];
-  for (let i = 0; i < 6; i++) {
-    const angle = (i * Math.PI) / 3; // 60 degrees between points
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-    points.push(`${x},${y}`);
-  }
+  // Create square with cut corners (microchip shape)
+  const chipPoints = [
+    `${chipX + cutSize},${chipY}`, // Top left after cut
+    `${chipX + chipSize - cutSize},${chipY}`, // Top right before cut
+    `${chipX + chipSize},${chipY + cutSize}`, // Top right after cut
+    `${chipX + chipSize},${chipY + chipSize - cutSize}`, // Bottom right before cut
+    `${chipX + chipSize - cutSize},${chipY + chipSize}`, // Bottom right after cut
+    `${chipX + cutSize},${chipY + chipSize}`, // Bottom left before cut
+    `${chipX},${chipY + chipSize - cutSize}`, // Bottom left after cut
+    `${chipX},${chipY + cutSize}` // Top left before cut
+  ];
   
-  // Create hexagon
+  // Create microchip shape
   svg.ele('polygon')
-    .att('points', points.join(' '))
+    .att('points', chipPoints.join(' '))
     .att('fill', circleColor)
     .att('opacity', '0.9');
 
@@ -38,13 +42,13 @@ function generateTerminalLogo(width = 120, height = 120) {
   const fontSize = Math.floor(width * 0.35);
   svg.ele('text')
     .att('x', width / 2)
-    .att('y', height / 2 + fontSize * 0.1) // Adjust for hexagon centering
+    .att('y', height / 2 + fontSize * 0.1) // Adjust for microchip centering
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace")
     .att('font-size', fontSize)
     .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
-    .att('dominant-baseline', 'middle') // Center in hexagon
-    .att('fill', '#ffffff') // White text for contrast against hexagon
+    .att('dominant-baseline', 'middle') // Center in microchip
+    .att('fill', '#ffffff') // White text for contrast against microchip
     .txt('aa;');
 
   return svg.end({ prettyPrint: true });
