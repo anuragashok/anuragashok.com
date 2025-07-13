@@ -13,25 +13,13 @@ function generateTerminalLogo(width = 120, height = 120) {
   // Define primary-600 color (Claret)
   const primaryColor = '#8B4A42';
 
-  // Add sleek border
-  svg.ele('rect')
-    .att('x', 2)
-    .att('y', 2)
-    .att('width', width - 4)
-    .att('height', height - 4)
-    .att('fill', 'none')
-    .att('stroke', primaryColor)
-    .att('stroke-width', '2')
-    .att('rx', '8')
-    .att('ry', '8');
-
   // Add terminal text "aa;" - statement terminator aesthetic
   svg.ele('text')
     .att('x', width / 2)
     .att('y', height / 2 + Math.floor(width * 0.06)) // Better centering for larger text
-    .att('font-family', "'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace")
+    .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace")
     .att('font-size', Math.floor(width * 0.35)) // Increased from 0.2 to 0.35 for larger text
-    .att('font-weight', 'bold')
+    .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
     .att('fill', primaryColor)
     .txt('aa;');
