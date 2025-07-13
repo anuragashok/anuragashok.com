@@ -14,27 +14,25 @@ function generateTerminalLogo(width = 120, height = 120) {
   const primaryColor = '#B8944A';
   const circleColor = '#ee5c00'; // Vibrant orange for background
 
-  // Add microchip/circuit board background field (square with cut corners)
-  const chipSize = Math.min(width, height) - 8; // Leave margin
-  const chipX = (width - chipSize) / 2;
-  const chipY = (height - chipSize) / 2;
-  const cutSize = Math.floor(chipSize * 0.15); // Size of corner cuts
+  // Add code editor tab background field (square with top-right cut corner)
+  const tabSize = Math.min(width, height) - 8; // Leave margin
+  const tabX = (width - tabSize) / 2;
+  const tabY = (height - tabSize) / 2;
+  const cutSize = Math.floor(tabSize * 0.2); // Size of top-right corner cut
   
-  // Create square with cut corners (microchip shape)
-  const chipPoints = [
-    `${chipX + cutSize},${chipY}`, // Top left after cut
-    `${chipX + chipSize - cutSize},${chipY}`, // Top right before cut
-    `${chipX + chipSize},${chipY + cutSize}`, // Top right after cut
-    `${chipX + chipSize},${chipY + chipSize - cutSize}`, // Bottom right before cut
-    `${chipX + chipSize - cutSize},${chipY + chipSize}`, // Bottom right after cut
-    `${chipX + cutSize},${chipY + chipSize}`, // Bottom left before cut
-    `${chipX},${chipY + chipSize - cutSize}`, // Bottom left after cut
-    `${chipX},${chipY + cutSize}` // Top left before cut
+  // Create square with single top-right cut corner (code editor tab shape)
+  const tabPoints = [
+    `${tabX},${tabY}`, // Top left
+    `${tabX + tabSize - cutSize},${tabY}`, // Top right before cut
+    `${tabX + tabSize},${tabY + cutSize}`, // Top right after cut (angled)
+    `${tabX + tabSize},${tabY + tabSize}`, // Bottom right
+    `${tabX},${tabY + tabSize}`, // Bottom left
+    `${tabX},${tabY}` // Back to top left
   ];
   
-  // Create microchip shape
+  // Create code editor tab shape
   svg.ele('polygon')
-    .att('points', chipPoints.join(' '))
+    .att('points', tabPoints.join(' '))
     .att('fill', circleColor)
     .att('opacity', '0.9');
 
@@ -42,13 +40,13 @@ function generateTerminalLogo(width = 120, height = 120) {
   const fontSize = Math.floor(width * 0.35);
   svg.ele('text')
     .att('x', width / 2)
-    .att('y', height / 2 + fontSize * 0.1) // Adjust for microchip centering
+    .att('y', height / 2 + fontSize * 0.1) // Adjust for tab centering
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace")
     .att('font-size', fontSize)
     .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
-    .att('dominant-baseline', 'middle') // Center in microchip
-    .att('fill', '#ffffff') // White text for contrast against microchip
+    .att('dominant-baseline', 'middle') // Center in code tab
+    .att('fill', '#ffffff') // White text for contrast against tab
     .txt('aa;');
 
   return svg.end({ prettyPrint: true });
