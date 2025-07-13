@@ -13,6 +13,18 @@ function generateTerminalLogo(width = 120, height = 120) {
   // Define primary-600 color
   const primaryColor = '#e60076';
 
+  // Add background that works on both light and dark themes
+  svg.ele('rect')
+    .att('x', 0)
+    .att('y', 0)
+    .att('width', width)
+    .att('height', height)
+    .att('fill', '#f8fafc')
+    .att('stroke', '#e2e8f0')
+    .att('stroke-width', '1')
+    .att('rx', '8')
+    .att('ry', '8');
+
   // Add sleek border
   svg.ele('rect')
     .att('x', 2)

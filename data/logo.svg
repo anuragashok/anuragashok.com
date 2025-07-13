@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="120" height="120" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" rx="8" ry="8"/>
   <rect x="2" y="2" width="116" height="116" fill="none" stroke="#e60076" stroke-width="2" rx="8" ry="8"/>
   <text x="60" y="67" font-family="'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace" font-size="42" font-weight="bold" text-anchor="middle" fill="#e60076">aa_</text>
 </svg>
