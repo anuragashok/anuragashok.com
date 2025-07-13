@@ -351,6 +351,11 @@ The personal website scaffold is ready for development and customization! # Test
 - Consistent hue around 34-42° for harmonious warm red-orange tones
 - Maintained custom typography (Tiro Tamil + Noto Sans)
 - Theme comment updated to "Vermilion Theme"
+- Updated logo color from #ee5c00 to #FF4500 (OrangeRed)
+- Enhanced logo generation script to create favicons in multiple sizes
+- Generated SVG favicons: 16x16, 32x32, 180x180, 192x192, 512x512
+- Updated layout.tsx to use new SVG favicons instead of PNG
+- Updated mask-icon color to match new logo color (#FF4500)
 
 ### Status: ✅ COMPLETED
 

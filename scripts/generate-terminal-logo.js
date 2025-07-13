@@ -58,22 +58,38 @@ function generateTerminalLogo(width = 120, height = 120) {
   return svg.end({ prettyPrint: true })
 }
 
-// Generate different sizes
+// Generate different sizes including favicons
 const sizes = [
-  { name: 'logo.svg', size: 120 },
-  { name: 'logo-large.svg', size: 400 },
-  { name: 'logo-small.svg', size: 64 },
+  { name: 'logo.svg', size: 120, path: 'data' },
+  { name: 'logo-large.svg', size: 400, path: 'public/static/images' },
+  { name: 'logo-small.svg', size: 64, path: 'public/static/images' },
+  // Favicon sizes
+  { name: 'favicon.svg', size: 32, path: 'public/static/favicons' },
+  { name: 'apple-touch-icon.svg', size: 180, path: 'public/static/favicons' },
+  { name: 'favicon-16x16.svg', size: 16, path: 'public/static/favicons' },
+  { name: 'favicon-32x32.svg', size: 32, path: 'public/static/favicons' },
+  { name: 'android-chrome-192x192.svg', size: 192, path: 'public/static/favicons' },
+  { name: 'android-chrome-512x512.svg', size: 512, path: 'public/static/favicons' },
 ]
 
-sizes.forEach(({ name, size }) => {
+sizes.forEach(({ name, size, path }) => {
   const logoSVG = generateTerminalLogo(size, size)
-  const filePath = name === 'logo.svg' ? `data/${name}` : `public/static/images/${name}`
+  const filePath = `${path}/${name}`
+
+  // Ensure directory exists
+  const dir = path
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
 
   fs.writeFileSync(filePath, logoSVG)
   console.log(`✅ Generated: ${filePath} (${size}x${size})`)
 })
 
-console.log('\n🎯 Terminal-style logo generated successfully!')
+console.log('\n🎯 Terminal-style logo and favicons generated successfully!')
 console.log('📁 Main logo: data/logo.svg')
 console.log('📁 Large version: public/static/images/logo-large.svg')
 console.log('📁 Small version: public/static/images/logo-small.svg')
+console.log('🔖 Favicons: public/static/favicons/ (multiple sizes)')
+console.log('📱 Apple touch icon: public/static/favicons/apple-touch-icon.svg')
+console.log('🤖 Android icons: public/static/favicons/android-chrome-*.svg')
