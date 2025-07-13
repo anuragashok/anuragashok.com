@@ -10,8 +10,8 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('viewBox', `0 0 ${width} ${height}`)
     .att('xmlns', 'http://www.w3.org/2000/svg');
 
-  // Define primary-600 color (converted from oklch(0.592 0.249 0.584))
-  const primaryColor = '#715bff';
+  // Define primary-600 color
+  const primaryColor = '#e60076';
 
   // Add sleek border
   svg.ele('rect')
