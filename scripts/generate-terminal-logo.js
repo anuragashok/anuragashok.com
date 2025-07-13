@@ -12,6 +12,15 @@ function generateTerminalLogo(width = 120, height = 120) {
 
   // Define primary-600 color (Claret)
   const primaryColor = '#8B4A42';
+  const circleColor = '#A0574D'; // Slightly lighter claret for background
+
+  // Add circular background field
+  svg.ele('circle')
+    .att('cx', width / 2)
+    .att('cy', height / 2)
+    .att('r', Math.min(width, height) / 2 - 4) // Leave small margin
+    .att('fill', circleColor)
+    .att('opacity', '0.9');
 
   // Add terminal text "aa;" - statement terminator aesthetic
   svg.ele('text')
@@ -21,7 +30,7 @@ function generateTerminalLogo(width = 120, height = 120) {
     .att('font-size', Math.floor(width * 0.35)) // Increased from 0.2 to 0.35 for larger text
     .att('font-weight', '500') // Medium weight for better readability in monospace
     .att('text-anchor', 'middle')
-    .att('fill', primaryColor)
+    .att('fill', '#ffffff') // White text for contrast against circle
     .txt('aa;');
 
   return svg.end({ prettyPrint: true });
