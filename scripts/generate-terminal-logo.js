@@ -12,12 +12,12 @@ function generateTerminalLogo(width = 120, height = 120) {
 
   // No background - transparent logo
 
-  // Add terminal text "aa_"
+  // Add terminal text "aa_" - larger size, less background space
   svg.ele('text')
     .att('x', width / 2)
-    .att('y', height / 2 + Math.floor(width * 0.04)) // Better centering
+    .att('y', height / 2 + Math.floor(width * 0.06)) // Better centering for larger text
     .att('font-family', "'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace")
-    .att('font-size', Math.floor(width * 0.2))
+    .att('font-size', Math.floor(width * 0.35)) // Increased from 0.2 to 0.35 for larger text
     .att('font-weight', 'bold')
     .att('text-anchor', 'middle')
     .att('fill', '#22c55e')
