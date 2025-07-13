@@ -9,19 +9,21 @@
   /* Font families */
   --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-heading: var(--font-tiro-tamil), serif;
+  --font-body: var(--font-noto-sans), sans-serif;
 
-  /* Colors - Refined Cyan Theme */
-  --color-primary-50: oklch(94.76% 0.079 195.87);
-  --color-primary-100: oklch(89.73% 0.153 194.76);
-  --color-primary-200: oklch(81.26% 0.139 194.76);
-  --color-primary-300: oklch(72.57% 0.124 194.76);
-  --color-primary-400: oklch(64.19% 0.11 194.76);
-  --color-primary-500: oklch(55.84% 0.095 194.76);
-  --color-primary-600: oklch(47.47% 0.081 194.76);
-  --color-primary-700: oklch(39.05% 0.067 194.76);
-  --color-primary-800: oklch(30.49% 0.052 194.76);
-  --color-primary-900: oklch(22.05% 0.038 194.76);
-  --color-primary-950: oklch(17.32% 0.03 194.76);
+  /* Colors - Casper Theme */
+  --color-primary-50: oklch(98.41% 0.01 219.38deg);
+  --color-primary-100: oklch(96.75% 0.01 225.89deg);
+  --color-primary-200: oklch(92.92% 0.02 220.81deg);
+  --color-primary-300: oklch(79.57% 0.04 223.96deg);
+  --color-primary-400: oklch(70.42% 0.07 223.92deg);
+  --color-primary-500: oklch(55.29% 0.08 224.36deg);
+  --color-primary-600: oklch(44.45% 0.07 223.99deg);
+  --color-primary-700: oklch(37.38% 0.07 225.3deg);
+  --color-primary-800: oklch(28.58% 0.06 230.13deg);
+  --color-primary-900: oklch(21.97% 0.05 239.45deg);
+  --color-primary-950: oklch(14.4% 0.04 251.92deg);
 
   --color-gray-50: oklch(98.51% 0 none);
   --color-gray-100: oklch(97.02% 0 none);
@@ -34,6 +36,9 @@
   --color-gray-800: oklch(26.86% 0 none);
   --color-gray-900: oklch(20.46% 0 none);
   --color-gray-950: oklch(14.48% 0 none);
+
+  /* Border radius */
+  --radius: 0.5rem;
 
   /* Line heights */
   --line-height-11: 2.75rem;

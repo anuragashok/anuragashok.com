@@ -143,4 +143,57 @@ The personal website scaffold is ready for development and customization! # Test
 
 ### Status: ✅ COMPLETED
 
+## Task: Update to Casper Theme with Custom Typography
+
+### Plan:
+
+1. ✅ Update the Tailwind CSS configuration to use the Casper color palette
+2. ✅ Add custom typography with Tiro Tamil and Noto Sans Elbasan fonts
+3. ✅ Update border radius configuration
+4. ✅ Test the new theme on both light and dark modes
+5. ✅ Commit the changes
+
+### Casper Theme Configuration:
+
+```css
+--color-casper-50: oklch(98.41% 0.01 219.38deg);
+--color-casper-100: oklch(96.75% 0.01 225.89deg);
+--color-casper-200: oklch(92.92% 0.02 220.81deg);
+--color-casper-300: oklch(79.57% 0.04 223.96deg);
+--color-casper-400: oklch(70.42% 0.07 223.92deg);
+--color-casper-500: oklch(55.29% 0.08 224.36deg);
+--color-casper-600: oklch(44.45% 0.07 223.99deg);
+--color-casper-700: oklch(37.38% 0.07 225.3deg);
+--color-casper-800: oklch(28.58% 0.06 230.13deg);
+--color-casper-900: oklch(21.97% 0.05 239.45deg);
+--color-casper-950: oklch(14.4% 0.04 251.92deg);
+
+--color-dove-gray-50: oklch(98.51% 0 none);
+--color-dove-gray-100: oklch(97.02% 0 none);
+--color-dove-gray-200: oklch(92.19% 0 none);
+--color-dove-gray-300: oklch(86.99% 0 none);
+--color-dove-gray-400: oklch(70.9% 0 none);
+--color-dove-gray-500: oklch(55.55% 0 none);
+--color-dove-gray-600: oklch(43.86% 0 none);
+--color-dove-gray-700: oklch(37.15% 0 none);
+--color-dove-gray-800: oklch(26.86% 0 none);
+--color-dove-gray-900: oklch(20.46% 0 none);
+--color-dove-gray-950: oklch(14.48% 0 none);
+
+--font-heading: 'Tiro Tamil', serif;
+--font-body: 'Noto Sans Elbasan', sans-serif;
+
+--radius: 0.5rem;
+```
+
+### Changes Made:
+
+- Updated `css/tailwind.css` with the Casper color palette (subtle blue-gray tones)
+- Added custom typography with Tiro Tamil (heading) and Noto Sans (body) fonts
+- Updated `app/layout.tsx` to import and configure the new fonts
+- Added border radius configuration (0.5rem)
+- Updated font variable mappings in CSS
+
+### Status: ✅ COMPLETED
+
 ---

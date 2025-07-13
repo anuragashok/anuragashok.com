@@ -126,11 +126,15 @@ anuragashok.com/
 
 ## Current Theme
 
-- **Color Palette**: Refined cyan theme using OKLCH color space
-- **Primary Colors**: Modern cyan palette (50-950) with consistent hue and excellent contrast ratios
-- **Typography**: Space Grotesk font family
+- **Color Palette**: Casper theme using OKLCH color space with subtle blue-gray tones
+- **Primary Colors**: Sophisticated Casper palette (50-950) with minimal saturation for elegance
+- **Typography**:
+  - **Headings**: Tiro Tamil (serif) for distinctive character
+  - **Body**: Noto Sans (sans-serif) for excellent readability
+  - **Fallback**: Space Grotesk for system compatibility
 - **Dark Mode**: Automatic system preference detection with manual toggle
-- **Color Characteristics**: Consistent hue (~195°) across all shades for visual harmony
+- **Color Characteristics**: Subtle blue-gray hues (~220°) with very low saturation for refined appearance
+- **Border Radius**: Consistent 0.5rem radius for modern, rounded design elements
 
 ## Performance Optimizations
 
