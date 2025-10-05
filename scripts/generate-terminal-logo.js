@@ -142,3 +142,7 @@ console.log('📁 Small version: public/static/images/logo-small.svg')
 console.log('🔖 Simplified favicons: public/static/favicons/favicon*.svg (orange "aa;" text only)')
 console.log('📱 Apple touch icon: public/static/favicons/apple-touch-icon.svg')
 console.log('🤖 Android icons: public/static/favicons/android-chrome-*.svg')
+console.log(
+  '💡 Note: For maximum browser compatibility, consider converting favicon.svg to favicon.ico'
+)
+console.log('💡 Web manifest updated to use SVG icons with #FF4500 theme color')

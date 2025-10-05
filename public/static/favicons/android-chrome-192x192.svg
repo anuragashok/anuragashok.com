@@ -1,5 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
-  <polygon points="36,19.5 126,19.5 156,49.5 156,172.5 36,172.5 36,19.5" fill="#FF4500" opacity="0.9"/>
-  <text x="96" y="101.7" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace" font-size="57" font-weight="500" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">aa;</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192"><text x="96" y="96" fill="#ff4500" dominant-baseline="middle" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace" font-size="96" font-weight="600" text-anchor="middle">A/A</text></svg>
