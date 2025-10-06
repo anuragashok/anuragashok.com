@@ -51,8 +51,8 @@ const SIZES = {
 function generateLogo(size: number): string {
   const svg = create({ version: '1.0', encoding: 'UTF-8' })
     .ele('svg')
-    .att('width', size)
-    .att('height', size)
+    .att('width', size.toString())
+    .att('height', size.toString())
     .att('viewBox', `0 0 ${size} ${size}`)
     .att('xmlns', 'http://www.w3.org/2000/svg')
 
@@ -62,10 +62,10 @@ function generateLogo(size: number): string {
   // Draw text
   svg
     .ele('text')
-    .att('x', size / 2)
-    .att('y', size / 2)
+    .att('x', (size / 2).toString())
+    .att('y', (size / 2).toString())
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
-    .att('font-size', fontSize)
+    .att('font-size', fontSize.toString())
     .att('font-weight', '600')
     .att('text-anchor', 'middle')
     .att('dominant-baseline', 'middle')
@@ -81,13 +81,13 @@ function generateLogo(size: number): string {
 function generateSolidBgLogo(size: number, bgColor: string = CONFIG.bgColor): string {
   const svg = create({ version: '1.0', encoding: 'UTF-8' })
     .ele('svg')
-    .att('width', size)
-    .att('height', size)
+    .att('width', size.toString())
+    .att('height', size.toString())
     .att('viewBox', `0 0 ${size} ${size}`)
     .att('xmlns', 'http://www.w3.org/2000/svg')
 
   // Background
-  svg.ele('rect').att('width', size).att('height', size).att('fill', bgColor)
+  svg.ele('rect').att('width', size.toString()).att('height', size.toString()).att('fill', bgColor)
 
   const color = CONFIG.primaryColor
   const fontSize = size * 0.5
@@ -95,10 +95,10 @@ function generateSolidBgLogo(size: number, bgColor: string = CONFIG.bgColor): st
   // Draw text
   svg
     .ele('text')
-    .att('x', size / 2)
-    .att('y', size / 2)
+    .att('x', (size / 2).toString())
+    .att('y', (size / 2).toString())
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
-    .att('font-size', fontSize)
+    .att('font-size', fontSize.toString())
     .att('font-weight', '600')
     .att('text-anchor', 'middle')
     .att('dominant-baseline', 'middle')
@@ -114,8 +114,8 @@ function generateSolidBgLogo(size: number, bgColor: string = CONFIG.bgColor): st
 function generateMonochromeLogo(size: number): string {
   const svg = create({ version: '1.0', encoding: 'UTF-8' })
     .ele('svg')
-    .att('width', size)
-    .att('height', size)
+    .att('width', size.toString())
+    .att('height', size.toString())
     .att('viewBox', `0 0 ${size} ${size}`)
     .att('xmlns', 'http://www.w3.org/2000/svg')
 
@@ -125,10 +125,10 @@ function generateMonochromeLogo(size: number): string {
   // Draw text
   svg
     .ele('text')
-    .att('x', size / 2)
-    .att('y', size / 2)
+    .att('x', (size / 2).toString())
+    .att('y', (size / 2).toString())
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
-    .att('font-size', fontSize)
+    .att('font-size', fontSize.toString())
     .att('font-weight', '600')
     .att('text-anchor', 'middle')
     .att('dominant-baseline', 'middle')
@@ -148,13 +148,6 @@ function generateMonochromeLogo(size: number): string {
 function optimizeSvg(svgString: string): string {
   const result = optimize(svgString, {
     multipass: true,
-    plugins: [
-      'preset-default',
-      {
-        name: 'removeViewBox',
-        active: false,
-      },
-    ],
   })
   return result.data
 }
