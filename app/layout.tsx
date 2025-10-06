@@ -116,7 +116,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SectionContainer>
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
-              <main className="mb-auto">{children}</main>
+              <div className="flex flex-col lg:flex-row lg:gap-8">
+                <main className="mb-auto min-w-0 flex-1">{children}</main>
+                <aside className="flex-shrink-0 lg:w-64">
+                  <div className="sticky top-24 space-y-3 pt-2 pb-8">
+                    <h2 className="text-primary-500 dark:text-primary-400 text-xl font-bold tracking-tight">
+                      About Me
+                    </h2>
+                    <div className="prose dark:prose-invert text-sm">
+                      <p>Content coming soon...</p>
+                    </div>
+                  </div>
+                </aside>
+              </div>
             </SearchProvider>
             <Footer />
           </SectionContainer>
