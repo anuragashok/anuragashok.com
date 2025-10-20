@@ -121,7 +121,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="flex flex-col lg:flex-row lg:gap-12">
                 <main className="mb-auto min-w-0 flex-1">{children}</main>
                 <aside className="flex-shrink-0 lg:w-64">
-                  <div className="sticky top-20 space-y-4 pb-8">
+                  <div className="space-y-4 pb-8">
                     <AboutMe />
                     <TagsSidebar />
                   </div>
