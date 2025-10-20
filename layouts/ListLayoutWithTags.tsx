@@ -29,7 +29,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
   const nextPage = currentPage + 1 <= totalPages
 
   return (
-    <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+    <div className="space-y-2 pt-4 pb-6">
       <nav className="flex justify-between">
         {!prevPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
@@ -73,7 +73,7 @@ export default function ListLayoutWithTags({
   return (
     <>
       <div>
-        <div className="pt-6 pb-6">
+        <div className="pb-4">
           <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
             {title}
           </h1>
@@ -83,8 +83,8 @@ export default function ListLayoutWithTags({
             {displayPosts.map((post) => {
               const { path, date, title, summary, tags } = post
               return (
-                <li key={path} className="py-5">
-                  <article className="flex flex-col space-y-2 xl:space-y-0">
+                <li key={path} className="py-4">
+                  <article className="flex flex-col space-y-1.5 xl:space-y-0">
                     <dl>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
@@ -93,7 +93,7 @@ export default function ListLayoutWithTags({
                         </time>
                       </dd>
                     </dl>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       <div>
                         <h2 className="text-2xl leading-8 font-bold tracking-tight">
                           <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">

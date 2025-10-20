@@ -118,10 +118,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SectionContainer>
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
-              <div className="flex flex-col lg:flex-row lg:gap-8">
+              <div className="flex flex-col lg:flex-row lg:gap-12">
                 <main className="mb-auto min-w-0 flex-1">{children}</main>
                 <aside className="flex-shrink-0 lg:w-64">
-                  <div className="sticky top-24 space-y-6 pt-2 pb-8">
+                  <div className="sticky top-20 space-y-4 pb-8">
                     <AboutMe />
                     <TagsSidebar />
                   </div>
