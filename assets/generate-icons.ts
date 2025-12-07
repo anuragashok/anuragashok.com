@@ -25,7 +25,9 @@ const CONFIG = {
   primaryColor: '#FF4500', // OrangeRed
   bgColor: '#FFFFFF',
   darkBgColor: '#1E1E1E',
-  text: 'A/A',
+  text: '{aa}', // Will be rendered as stacked a's
+  subtext: '@anuragashok',
+  useStackedText: true, // Special flag for stacked rendering
 }
 
 const SIZES = {
@@ -45,38 +47,122 @@ const SIZES = {
 // ============================================================================
 
 /**
- * Generate logo with text from CONFIG
- * This is the preferred style
+ * Generate logo with code-like design
+ * {aa} with stacked a's or regular text based on config
  */
 function generateLogo(size: number): string {
   const svg = create({ version: '1.0', encoding: 'UTF-8' })
     .ele('svg')
-    .att('width', size.toString())
-    .att('height', size.toString())
-    .att('viewBox', `0 0 ${size} ${size}`)
+    .att('width', (size * 2).toString())
+    .att('height', (size * 0.9).toString())
+    .att('viewBox', `0 0 ${size * 2} ${size * 0.9}`)
     .att('xmlns', 'http://www.w3.org/2000/svg')
 
   const color = CONFIG.primaryColor
+  const grayColor = '#6B7280'
   const fontSize = size * 0.5
+  const smallFontSize = size * 0.15
 
-  // Draw text
+  if (CONFIG.useStackedText) {
+    // Create {aa} with stacked letters centered in an invisible box
+    const braceFontSize = fontSize
+    const letterFontSize = braceFontSize * 0.45
+    const centerY = size * 0.28 // Moved up for better vertical centering
+
+    const startX = size * 0.1
+    const charWidth = braceFontSize * 0.45 // Reduced from 0.6 for tighter spacing
+
+    // Opening brace
+    svg
+      .ele('text')
+      .att('x', startX.toString())
+      .att('y', centerY.toString())
+      .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
+      .att('font-size', braceFontSize.toString())
+      .att('font-weight', '700')
+      .att('text-anchor', 'start')
+      .att('dominant-baseline', 'middle')
+      .att('fill', color)
+      .txt('{')
+
+    // Invisible box for centered stacked letters
+    const boxX = startX + charWidth
+    const boxCenterX = boxX + charWidth / 2
+    const verticalGap = letterFontSize * 0.65
+
+    // Top 'a'
+    svg
+      .ele('text')
+      .att('x', boxCenterX.toString())
+      .att('y', (centerY - verticalGap).toString())
+      .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
+      .att('font-size', letterFontSize.toString())
+      .att('font-weight', '700')
+      .att('text-anchor', 'middle')
+      .att('dominant-baseline', 'middle')
+      .att('fill', color)
+      .txt('a')
+
+    // Bottom 'a'
+    svg
+      .ele('text')
+      .att('x', boxCenterX.toString())
+      .att('y', (centerY + verticalGap).toString())
+      .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
+      .att('font-size', letterFontSize.toString())
+      .att('font-weight', '700')
+      .att('text-anchor', 'middle')
+      .att('dominant-baseline', 'middle')
+      .att('fill', color)
+      .txt('a')
+
+    // Closing brace
+    svg
+      .ele('text')
+      .att('x', (boxX + charWidth * 0.7).toString())
+      .att('y', centerY.toString())
+      .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
+      .att('font-size', braceFontSize.toString())
+      .att('font-weight', '700')
+      .att('text-anchor', 'start')
+      .att('dominant-baseline', 'middle')
+      .att('fill', color)
+      .txt('}')
+  } else {
+    // Draw regular text
+    svg
+      .ele('text')
+      .att('x', (size * 0.1).toString())
+      .att('y', (size * 0.32).toString())
+      .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
+      .att('font-size', fontSize.toString())
+      .att('font-weight', '700')
+      .att('text-anchor', 'start')
+      .att('dominant-baseline', 'middle')
+      .att('fill', color)
+      .txt(CONFIG.text)
+  }
+
+  // Draw subtext (@anuragashok)
   svg
     .ele('text')
-    .att('x', (size / 2).toString())
-    .att('y', (size / 2).toString())
+    .att('x', (size * 0.1).toString())
+    .att('y', (size * 0.68).toString())
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
-    .att('font-size', fontSize.toString())
-    .att('font-weight', '600')
-    .att('text-anchor', 'middle')
+    .att('font-size', smallFontSize.toString())
+    .att('font-weight', '400')
+    .att('text-anchor', 'start')
     .att('dominant-baseline', 'middle')
-    .att('fill', color)
-    .txt(CONFIG.text)
+    .att('fill', grayColor)
+    .att('opacity', '0.7')
+    .txt(CONFIG.subtext)
 
   return svg.end({ prettyPrint: true })
 }
 
 /**
  * Solid background version (for Apple Touch Icon, etc.)
+ * Just shows A/A without subtext (favicons are too small)
  */
 function generateSolidBgLogo(size: number, bgColor: string = CONFIG.bgColor): string {
   const svg = create({ version: '1.0', encoding: 'UTF-8' })
@@ -92,14 +178,14 @@ function generateSolidBgLogo(size: number, bgColor: string = CONFIG.bgColor): st
   const color = CONFIG.primaryColor
   const fontSize = size * 0.5
 
-  // Draw text
+  // Draw text (A/A only, no subtext for small icons)
   svg
     .ele('text')
     .att('x', (size / 2).toString())
     .att('y', (size / 2).toString())
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
     .att('font-size', fontSize.toString())
-    .att('font-weight', '600')
+    .att('font-weight', '700')
     .att('text-anchor', 'middle')
     .att('dominant-baseline', 'middle')
     .att('fill', color)
@@ -110,6 +196,7 @@ function generateSolidBgLogo(size: number, bgColor: string = CONFIG.bgColor): st
 
 /**
  * Safari pinned tab (monochrome)
+ * Just shows A/A without subtext
  */
 function generateMonochromeLogo(size: number): string {
   const svg = create({ version: '1.0', encoding: 'UTF-8' })
@@ -119,17 +206,17 @@ function generateMonochromeLogo(size: number): string {
     .att('viewBox', `0 0 ${size} ${size}`)
     .att('xmlns', 'http://www.w3.org/2000/svg')
 
-  const fontSize = size * 0.3
+  const fontSize = size * 0.5
   const color = '#000000'
 
-  // Draw text
+  // Draw text (A/A only)
   svg
     .ele('text')
     .att('x', (size / 2).toString())
     .att('y', (size / 2).toString())
     .att('font-family', "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', monospace")
     .att('font-size', fontSize.toString())
-    .att('font-weight', '600')
+    .att('font-weight', '700')
     .att('text-anchor', 'middle')
     .att('dominant-baseline', 'middle')
     .att('fill', color)
