@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
 import { siteConfig } from "@/lib/site-config";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Anurag Ashok",
+    description: "Personal site and engineering blog of Anurag Ashok.",
+    url: "/",
+    images: [{ url: "/og/default" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og/default"],
+  },
+};
 
 export default async function HomePage() {
   const latest = (await getAllPosts()).slice(0, 5);
