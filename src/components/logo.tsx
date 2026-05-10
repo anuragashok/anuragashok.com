@@ -23,7 +23,7 @@ export function Logo({ size = 28, className }: Props) {
       />
       <text
         x="3"
-        y="24"
+        y="22"
         fontFamily="var(--font-serif)"
         fontWeight="500"
         fontSize="26"
@@ -31,7 +31,7 @@ export function Logo({ size = 28, className }: Props) {
       >
         a
       </text>
-      <circle cx="19" cy="23" r="2.5" fill="var(--accent)" />
+      <circle cx="21" cy="21" r="2.5" fill="var(--accent)" />
     </svg>
   );
 }
