@@ -6,6 +6,7 @@ import { ThemeScript } from "@/components/theme-script";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { siteConfig } from "@/lib/site-config";
+import { fontSans, fontSerif, fontMono } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -18,7 +19,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable}`}
+    >
       <head>
         <ThemeScript />
       </head>
