@@ -10,17 +10,28 @@ export function Logo({ size = 28, className }: Props) {
       aria-label="Anurag Ashok"
       className={className}
     >
-      <text
+      <rect
         x="1"
-        y="26"
+        y="1"
+        width="30"
+        height="30"
+        rx="5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeOpacity="0.3"
+      />
+      <text
+        x="3"
+        y="23"
         fontFamily="var(--font-serif)"
         fontWeight="500"
-        fontSize="28"
+        fontSize="24"
         fill="currentColor"
       >
         a
       </text>
-      <circle cx="25" cy="25" r="2.5" fill="var(--accent)" />
+      <circle cx="23" cy="22" r="2.5" fill="var(--accent)" />
     </svg>
   );
 }
