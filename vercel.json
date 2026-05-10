@@ -1,0 +1,30 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
+  "outputDirectory": ".next",
+  "regions": ["iad1"],
+  "github": {
+    "silent": false
+  },
+  "headers": [
+    {
+      "source": "/feed.xml",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+      ]
+    }
+  ],
+  "redirects": [
+    { "source": "/feed", "destination": "/feed.xml", "permanent": true },
+    { "source": "/rss", "destination": "/feed.xml", "permanent": true },
+    { "source": "/atom", "destination": "/feed.xml", "permanent": true }
+  ]
+}
