@@ -64,7 +64,7 @@ export default async function PostPage(
         <h1 className="font-serif text-4xl font-medium tracking-tight">
           {post.frontmatter.title}
         </h1>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2 font-mono text-xs tabular-nums text-muted-foreground">
           <time dateTime={post.frontmatter.date.toISOString()}>
             {post.frontmatter.date.toISOString().slice(0, 10)}
           </time>

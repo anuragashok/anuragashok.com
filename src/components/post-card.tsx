@@ -9,7 +9,7 @@ export function PostCard({ post }: { post: Post }) {
       <Link href={`/blog/${post.slug}`} className="font-medium hover:underline">
         {post.frontmatter.title}
       </Link>
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+      <div className="flex items-center gap-2 font-mono text-xs tabular-nums text-muted-foreground">
         <time dateTime={post.frontmatter.date.toISOString()}>{date}</time>
         <span>·</span>
         <span>{post.readingTime} min read</span>
