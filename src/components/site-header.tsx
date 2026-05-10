@@ -10,8 +10,8 @@ export function SiteHeader() {
           {siteConfig.name}
         </Link>
         <nav className="flex items-center gap-4 text-sm">
-          <Link href="/blog" className="hover:underline">Blog</Link>
-          <Link href="/about" className="hover:underline">About</Link>
+          <Link href="/blog" className="transition-colors hover:text-accent">Blog</Link>
+          <Link href="/about" className="transition-colors hover:text-accent">About</Link>
           <ThemeToggle />
         </nav>
       </div>

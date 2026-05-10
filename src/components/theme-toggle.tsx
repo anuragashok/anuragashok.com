@@ -27,6 +27,7 @@ export function ThemeToggle() {
       size="icon"
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+      className="focus-visible:ring-2 focus-visible:ring-accent"
     >
       {mounted ? (dark ? <Sun className="size-4" /> : <Moon className="size-4" />) : null}
     </Button>
