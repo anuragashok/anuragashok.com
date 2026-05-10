@@ -61,7 +61,7 @@ export default async function PostPage(
   return (
     <article className="prose dark:prose-invert max-w-none">
       <header className="not-prose mb-8 space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">
+        <h1 className="font-serif text-4xl font-medium tracking-tight">
           {post.frontmatter.title}
         </h1>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">

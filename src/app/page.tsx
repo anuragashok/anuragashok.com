@@ -22,7 +22,7 @@ export default async function HomePage() {
   return (
     <div className="space-y-10">
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight">{siteConfig.name}</h1>
+        <h1 className="font-serif text-5xl font-medium tracking-tight">{siteConfig.name}</h1>
         <p className="text-muted-foreground">{siteConfig.tagline}</p>
       </section>
       <section className="space-y-4">
