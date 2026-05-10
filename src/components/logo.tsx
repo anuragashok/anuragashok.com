@@ -1,6 +1,6 @@
 type Props = { size?: number; className?: string };
 
-export function Logo({ size = 24, className }: Props) {
+export function Logo({ size = 28, className }: Props) {
   return (
     <svg
       width={size}
@@ -11,16 +11,16 @@ export function Logo({ size = 24, className }: Props) {
       className={className}
     >
       <text
-        x="2"
-        y="24"
+        x="1"
+        y="26"
         fontFamily="var(--font-serif)"
         fontWeight="500"
-        fontSize="24"
+        fontSize="28"
         fill="currentColor"
       >
         a
       </text>
-      <circle cx="22" cy="23" r="2" fill="var(--accent)" />
+      <circle cx="25" cy="25" r="2.5" fill="var(--accent)" />
     </svg>
   );
 }

@@ -11,7 +11,7 @@ export function SiteHeader() {
           href="/"
           className="flex items-center gap-2 font-semibold tracking-tight transition-colors hover:text-accent"
         >
-          <Logo size={24} />
+          <Logo />
           <span className="hidden sm:inline">{siteConfig.name}</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm">
