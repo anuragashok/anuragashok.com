@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 export function SiteHeader() {
   return (
     <header className="border-b">
-      <div className="mx-auto flex w-full max-w-2xl items-center justify-between px-4 py-4">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
         <Link href="/" className="font-semibold tracking-tight">
           {siteConfig.name}
         </Link>

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   const latest = (await getAllPosts()).slice(0, 5);
   return (
-    <div className="space-y-10">
+    <div className="mx-auto max-w-3xl space-y-10">
       <section className="space-y-3">
         <h1 className="font-serif text-5xl font-medium tracking-tight">{siteConfig.name}</h1>
         <p className="text-muted-foreground">{siteConfig.tagline}</p>

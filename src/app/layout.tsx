@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-dvh bg-background text-foreground antialiased">
         <SiteHeader />
-        <main className="mx-auto w-full max-w-2xl px-4 py-10">{children}</main>
+        <main className="mx-auto w-full max-w-5xl px-4 py-10">{children}</main>
         <SiteFooter />
         <Analytics />
         <SpeedInsights />

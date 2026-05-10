@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <article className="prose dark:prose-invert max-w-none">
+    <article className="prose dark:prose-invert mx-auto max-w-2xl">
       <h1>About</h1>
       <p>
         I&apos;m {siteConfig.name}, a software engineer. This site is where I write
