@@ -34,6 +34,15 @@ describe("posts", () => {
     expect(first).toBeDefined();
     const id = first!.url.replace(/^#/, "");
     expect(post?.content).toContain(`id="${id}"`);
+    // rehype-slug adds `id="..."` regardless of where it sits in the plugin
+    // array, so the assertion above alone does NOT prove ordering — it would
+    // pass even if rehype-slug ran after rehype-autolink-headings. The
+    // anchor is what actually depends on order: rehype-autolink-headings
+    // needs a pre-existing id to build its href, so if the plugins run in
+    // the wrong order it silently emits the heading with no `<a>` at all.
+    // Asserting the anchor here is what guards `rehypeSlug` running BEFORE
+    // `rehypeAutolinkHeadings` in velite.config.ts.
+    expect(post?.content).toContain(`<a href="#${id}">`);
   });
 
   it("computes reading time", () => {

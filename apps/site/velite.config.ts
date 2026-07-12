@@ -36,20 +36,22 @@ export default defineConfig({
       // rehype-slug MUST come first: velite's s.toc() emits anchor URLs but adds no
       // heading ids of its own. Without this, every TOC link is dead.
       rehypeSlug,
-      // The `as never` sidesteps a TS structural-typing clash between
-      // @shikijs/rehype's Plugin<[RehypeShikiOptions], Root> and velite's
-      // PluggableList (unified's `this: Processor` generic resolves to two
-      // nominally distinct `Settings` types across the two packages' type
-      // graphs even though both point at the same unified@11.0.5 install).
-      // Purely a type-level mismatch — runtime behavior is unaffected.
+      // Structural-typing clash between @shikijs/rehype's
+      // Plugin<[RehypeShikiOptions], Root> and velite's PluggableList: unified's
+      // `this: Processor` generic resolves to two nominally distinct `Settings`
+      // types across the two packages' type graphs even though both point at
+      // the same unified@11.0.5 install. Purely a type-level mismatch — runtime
+      // behavior is unaffected. Remove the suppression below (and re-check)
+      // next time @shikijs/rehype or unified is upgraded.
       [
+        // @ts-expect-error — see structural-typing clash note above.
         rehypeShiki,
         {
           themes: { light: "github-light", dark: "github-dark" },
           // Emit CSS vars only — required for the class-based dark mode strategy.
           defaultColor: false,
         },
-      ] as never,
+      ],
       [rehypeAutolinkHeadings, { behavior: "wrap" }],
     ],
   },
