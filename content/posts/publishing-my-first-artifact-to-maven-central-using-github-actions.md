@@ -5,7 +5,7 @@ summary: "I wanted to publish the build artifacts of my wiremock extension to ma
 tags: ["maven"]
 ---
 
-![Publishing my first artifact to maven central using GitHub actions](https://images.ctfassets.net/lybfa03y94yw/5aipgcfbeKO4axygu3H3lj/746c2b1c14a92ebd075d24d10986ec24/github_and_maven__1_.jpg)
+![Publishing my first artifact to maven central using GitHub actions](./img/github_and_maven__1_.jpg)
 *Photo by [Ferenc Almasi](https://unsplash.com/@flowforfrank?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/programming-publish?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)*
 
 I recently published a post on how to record response time with wiremock. Later, I created a java library out of it and published it on Github.

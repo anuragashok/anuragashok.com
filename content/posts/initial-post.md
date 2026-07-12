@@ -5,7 +5,7 @@ summary: "Jamstack is very popular these days. I decided to build this site usin
 tags: ["nextjs", "jamstack", "github", "github-pages", "react"]
 ---
 
-![Initial Post](https://images.ctfassets.net/lybfa03y94yw/6I30Ej62DPAl0qK3HVt38B/8e0334362cb4a2c30ffc1bb1471606d9/intial-post.jpg)
+![Initial Post](./img/intial-post.jpg)
 *Photo by [Pixabay](https://www.pexels.com/@samuel-wolfl-628277?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/intermodal-container-stacked-on-port-1427541/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)*
 
 Taking a cue from [Initial Commit](https://initialcommit.com/blog/What-Is-An-Initial-Commit-In-Git), I decided to name this first post as Initial Post.
@@ -21,8 +21,6 @@ I created this blog from scratch as I wanted it to also be a learning experience
 - **Backend:** At the moment, the site can compile to static HTML. So I am deferring this decision until the time I need a backend.
 
 The overall architecture of the site looks like this.
-
-![Intial Architecture](/diagrams/initial-post.svg)
 
 ### References:
 

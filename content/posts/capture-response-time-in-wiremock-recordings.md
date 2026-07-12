@@ -5,7 +5,7 @@ summary: "Wiremock provides a great recording feature to capture live flows and 
 tags: ["wiremock", "load-test", "java", "delay"]
 ---
 
-![Capture response time in wiremock recordings](https://images.ctfassets.net/lybfa03y94yw/67cLyOldHSrZ3p11WX9ydJ/e223e57b570f4ec54f62f1fec66002b9/Technology___Theory__1_.jpg)
+![Capture response time in wiremock recordings](./img/Technology___Theory__1_.jpg)
 
 [Wiremock](http://wiremock.org/) is a wonderful tool for mocking external dependencies for testing. I often swap out the external dependencies/services of an application with wiremock during the application load test.
 

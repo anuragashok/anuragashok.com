@@ -5,7 +5,7 @@ summary: "Containers are not only for application deployments. They offer many a
 tags: ["docker", "container", "development"]
 ---
 
-![Use Docker for local development](https://images.ctfassets.net/lybfa03y94yw/31kEfTG8wIqkq8mixJ9skZ/6d86d7f4d0c700179d8eae5b31e01766/Untitled_design.jpg)
+![Use Docker for local development](./img/Untitled_design.jpg)
 *Photo by [Pixabay](https://www.pexels.com/@pixabay?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/business-coffee-composition-computer-265667/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)*
 
 Docker/Containers have become the de facto standard for building and deploying applications. The isolation, portability and easy scaling capabilities of containers make them the popular choice for app deployments.
@@ -95,8 +95,6 @@ DEFAULTS PORT=3000 DEBUGPORT=9229 COMMAND="yarn dev"
 Sections in `[]` are optional and have defaults set.
 
 To start the application, I need to write `./run` on the shell. It starts the container, exposing the ports 3000 and 9229 on the host and then runs `yarn dev` inside the container.
-
-![Sample Output](https://theoverengineered.blog/docker-local.jpg)
 
 Any command can be executed inside the container by prefixing it with `./run`
 E.g. To add a package, run `./run yarn add some-package-name`

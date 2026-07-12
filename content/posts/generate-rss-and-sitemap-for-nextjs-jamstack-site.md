@@ -5,7 +5,7 @@ summary: "RSS and sitemap are essential for blogs today. RSS Feeds let users sub
 tags: ["rss", "sitemap", "blogging", "jamstack", "nextjs"]
 ---
 
-![Generate RSS and Sitemap for Next.js JAMstack site](https://images.ctfassets.net/lybfa03y94yw/3IejIjMkhHCU5xGOwXuW5o/6e1c1a898cbcde31682db277183fba0b/GENERATE_RSS_AND_SITEMAP.png)
+![Generate RSS and Sitemap for Next.js JAMstack site](./img/GENERATE_RSS_AND_SITEMAP.png)
 *Image by [mohamed Hassan](https://pixabay.com/users/mohamed_hassan-5229782/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4059862) from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4059862)*
 
 RSS and sitemap are essential for blogs today. RSS Feeds let users subscribe to your content and improves user engagement. On the other hand, a sitemap is for search engines to find and index your content.

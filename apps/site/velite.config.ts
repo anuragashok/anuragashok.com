@@ -3,6 +3,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import { defineCollection, defineConfig, s } from "velite";
 
+import { rehypeOptimizeImages } from "./lib/rehype-optimize-images";
+
 const posts = defineCollection({
   name: "Post",
   pattern: "posts/**/*.md",
@@ -53,6 +55,12 @@ export default defineConfig({
         },
       ],
       [rehypeAutolinkHeadings, { behavior: "wrap" }],
+      // MUST be last: it rewrites `<img src="/static/…">` to hit Next's image
+      // optimizer. Velite has already copied and hashed the images into
+      // `/static/` by the time earlier plugins run, but this still needs to
+      // run after everything else so it only ever sees the final `/static/`
+      // path (not an intermediate one some other plugin might produce).
+      rehypeOptimizeImages,
     ],
   },
 });
