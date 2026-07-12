@@ -285,6 +285,28 @@ with nobody behind it is a promise owed; the audience here is engineers, who sti
 The feed is therefore first-class, not an afterthought — correct dates, full content, valid
 against a feed validator, and linked from every page.
 
+## Rendering strategy
+
+**Static prerendering. No `output: 'export'`.**
+
+All four routes are prerendered to HTML at build time and served from Vercel's CDN. Every page
+carries an explicit `export const dynamic = 'force-static'` — so a stray dynamic API can never
+silently promote a page to a server render. Nothing here reads cookies, headers, or a database.
+
+`output: 'export'` was considered and **rejected**. It emits a pure static folder hostable
+anywhere, which sounds like the more everything-as-code choice — but it would:
+
+- **kill `next/image` optimization** (static export has no optimizer; you set
+  `unoptimized: true`), throwing away the AVIF/WebP/resizing win ported specifically to fix LCP
+  on these image-heavy posts;
+- **disable `headers()`**, forcing the CSP and security headers into `vercel.json` and
+  splitting the config across two places;
+- make `ImageResponse` OG generation fragile.
+
+It buys portability we do not need (Vercel + Cloudflare, not moving) at the cost of the image
+pipeline we do. The output is identical static HTML either way; export is simply the slower one
+for this content.
+
 ## Testing
 
 - **Vitest** — profile schema validation, markdown pipeline, post loading and draft filtering.
