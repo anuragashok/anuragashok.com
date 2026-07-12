@@ -1,36 +1,36 @@
 # anuragashok.com
 
-Personal site and blog. Next.js (App Router), Tailwind v4, shadcn/ui, deployed on Vercel.
+Everything-as-code, applied to a person.
 
-## Local development
+`packages/profile` is the canonical source of truth — `me.yaml` plus a zod schema.
+`content/posts` is the canonical writing. `apps/site` is a Next.js renderer that
+imports both and owns neither.
 
-```bash
-pnpm install
-pnpm dev
-```
+The website is the first renderer of that source of truth. It is not the source of truth.
 
-Open http://localhost:3000.
+## Develop
 
-## Writing a post
+    pnpm install
+    pnpm dev
 
-Add a Markdown file under `content/posts/`. Filename = slug (kebab-case).
+## Write
 
-```md
----
-title: "Title"
-date: 2026-05-09
-summary: "Short blurb."
-tags: ["topic"]
----
+Add a Markdown file to `content/posts/`. Filename = slug.
 
-Body…
-```
+    ---
+    title: "Title"
+    date: 2026-07-12
+    summary: "Short blurb."
+    tags: ["topic"]
+    ---
 
-`draft: true` excludes the post from production builds but shows it in `pnpm dev`.
+    Body…
+
+`draft: true` hides a post in production and shows it in dev.
 
 ## Scripts
 
 - `pnpm dev` — dev server
 - `pnpm build` — production build
 - `pnpm check` — typecheck + lint + unit tests
-- `pnpm test:e2e` — Playwright smoke tests against `pnpm build && pnpm start`
+- `pnpm test:e2e` — Playwright against the production build
