@@ -115,17 +115,39 @@ Copy ships as written during design — accurate, and good enough to launch. Ref
   An agent is a *tool for producing markdown* — never a layer between the author and the file.
   Markdown in the repo stays canonical, always.
 
-**Launch content:** the 5 posts from `theoverengineered.blog` (Dec 2020 – Feb 2021), migrated
-with original dates. They currently live in **Contentful**, not in git — the old blog is a
-Next.js frontend over a CMS. Migration pulls them via the Contentful delivery API and commits
-them as markdown, which finally puts them under version control.
+**Launch content:** the 5 posts from `theoverengineered.blog` (Dec 2020 – Feb 2021).
+**Migration is DONE** — they are committed as markdown in `content/posts/`, under version
+control for the first time.
 
-Posts to migrate:
-1. Initial Post
-2. Generate RSS and Sitemap for Next.js JAMstack site
-3. Use Docker for local development
-4. Capture response time in wiremock recordings
-5. Publishing my first artifact to maven central using GitHub actions
+| slug | date |
+|---|---|
+| `initial-post` | 2020-12-19 |
+| `generate-rss-and-sitemap-for-nextjs-jamstack-site` | 2020-12-27 |
+| `use-docker-for-local-development` | 2021-01-03 |
+| `capture-response-time-in-wiremock-recordings` | 2021-02-06 |
+| `publishing-my-first-artifact-to-maven-central-using-github-actions` | 2021-02-27 |
+
+**How, and why it matters:** the old blog was a Next.js frontend over Contentful, so the posts
+were never in git. During migration we discovered `theoverengineered.blog` **no longer exists**
+— the domain expired and is parked for sale on Sedo (€500). The posts existed nowhere live.
+They were recovered from an **April 2021 Wayback Machine snapshot** by pulling `__NEXT_DATA__`
+out of the archived pages, which still carried the original Contentful payload — so titles,
+dates, summaries and tags are the author's originals, corroborated against the archived
+`rss.xml`. Code in the wiremock and Maven posts lived in client-rendered gist embeds with no
+`src` in the HTML; it was recovered from the GitHub gists API.
+
+This is the strongest possible argument for the premise of this repo. Content in a CMS behind
+a domain you forgot to renew is content you do not own. Markdown in git is.
+
+**Decisions taken:**
+- **Self-host all images** in `public/`. Do not hotlink `images.ctfassets.net` — it is a CDN
+  tied to a Contentful space that may not be under his control, which is the same failure mode
+  that just destroyed the old blog.
+- **Dates kept as the old site rendered them** (UTC). Contentful stored midnight SGT, so
+  `2020-12-20T00:00+08:00` rendered as Dec 19. Matching the rendering keeps them consistent
+  with the archived RSS and any surviving inbound links.
+- Two images are unrecoverable: a site-relative SVG in `initial-post` and a hotlinked JPEG in
+  `use-docker-for-local-development`. Recreate or drop them during implementation.
 
 ## Testing
 
@@ -139,7 +161,7 @@ That last assertion is worth writing explicitly: it is the test that guards the 
 
 - Vercel deploy (project `anuragashok-com`, scope `anuragashoks-projects`).
 - **`anuragashok.com` wired to the domain.** Currently 404s. A branding hub on a `vercel.app`
-  subdomain is not a branding hub. Registrar to be confirmed by the user.
+  subdomain is not a branding hub. **Registrar: Cloudflare.**
 
 ## Explicitly out of scope
 
@@ -148,7 +170,8 @@ for `hello@anuragashok.com`. All tracked as GitHub issues.
 
 ## Open dependencies
 
-1. **Contentful space ID + delivery token** — blocks post migration.
-2. **Registrar for `anuragashok.com`** — blocks domain wiring.
+None. Post migration is complete; registrar is confirmed (Cloudflare). Implementation can start.
 
-Neither blocks the rest of the build.
+One decision sits outside this repo and is tracked as an issue: **`theoverengineered.blog` is
+for sale.** Anyone can buy the domain his old technical writing is still linked from. Either
+buy it back and 301 it to the new site, or accept the dead inbound links.
