@@ -1,0 +1,26 @@
+# The canonical Anurag Ashok.
+# This file is the source of truth. The website is one renderer of it.
+# Change a fact here, and it changes everywhere it is published.
+
+name: Anurag Ashok
+headline: I make code work.
+
+role: Lead Software Engineer
+company: Grab
+team: Fulfillment Dispatch # matching supply to demand across Southeast Asia
+location: Singapore
+
+since: 2013-02 # writing software professionally
+track: IC # and staying that way
+
+obsessions:
+  - automation
+  - everything-as-code
+  - agentic coding
+
+previously:
+  - Singapore Airlines
+
+links:
+  github: https://github.com/anuragashok
+  linkedin: https://www.linkedin.com/in/anurag-ashok/
