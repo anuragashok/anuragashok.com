@@ -184,10 +184,29 @@ under the app gives the app ownership, and the thesis leaks.
 component library is a liability — its defaults pull toward exactly the templated-Next.js-blog
 look this rebuild exists to escape. ~8 hand-rolled components; inline SVG for the 3–4 icons.
 
-**Dependencies:** `next`, `react`, `tailwindcss` v4, `zod`, `yaml`, `gray-matter`,
-unified/remark/rehype, `shiki`, `feed`, `@vercel/og`, `@vercel/analytics`,
-`@vercel/speed-insights`. Dev: `typescript`, `eslint`, `vitest`, `@playwright/test`.
-Roughly half of what the old site carried.
+**Base: `create-next-app`, not a starter template.** A survey of the landscape (July 2026)
+found **no Next 16 + Tailwind v4 blog starter with meaningful traction**. The obvious candidate,
+`timlrx/tailwind-nextjs-starter-blog` (10.5k★), is on Next 15.5 + Yarn and depends on
+`contentlayer2` — a fork of the abandoned Contentlayer — and ~70% of its features (component
+library, comments, newsletter, search, projects page) are things this spec explicitly rejects.
+`shadcn-ui/taxonomy` is on Next 13 / Tailwind v3 and effectively dead. `leerob/site` is current
+but has **no license file** and ships no RSS, OG, or dark mode. Nextra is a docs framework whose
+value is a theme we would delete.
+
+Published "perfect Lighthouse" claims are marketing — measured on demos with features disabled.
+Page speed here comes from not shipping things, which is already the chosen configuration:
+static render, no component library, minimal client JS. Three font families and OG generation
+will dominate CWV far more than any starter's baseline.
+
+**Dependencies:** `next`, `react`, `tailwindcss` v4, **`velite`** (markdown + zod frontmatter +
+local asset processing, in one dep — the maintained successor to Contentlayer; replaces the
+gray-matter + unified/remark/rehype chain), `shiki` (via velite's rehype hook), `yaml`, `zod`,
+`feed`, `@vercel/analytics`, `@vercel/speed-insights`. OG images use Next's native
+`ImageResponse`; sitemap uses native `sitemap.ts`. Dev: `typescript`, `eslint`, `vitest`,
+`@playwright/test`.
+
+Velite's local-asset handling also solves a real problem: post images get processed into the
+build instead of hotlinked from `images.ctfassets.net`, a CDN we do not control.
 
 **Dark mode:** system default + manual toggle, persisted to `localStorage`, with an inline
 head script to set the class before paint (no flash). The dark theme is a designed inversion,
