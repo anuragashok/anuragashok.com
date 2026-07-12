@@ -251,10 +251,30 @@ Not ported: `rehype-preset-minify` (Next already minifies — marginal), and `re
 which we beat outright — **Shiki highlights at build time and ships zero runtime JS**, while
 Prism ships a highlighter to the browser.
 
-**The real perf budget is the fonts.** Three families (Instrument Serif, Inter, IBM Plex Mono)
-are a bigger CWV risk than anything a starter could fix. Mitigation: `next/font` self-hosting,
-Latin subset only, `font-display: swap`, and preloading only the families used above the fold.
-The locked design is also the perf budget being spent — accept it knowingly.
+**The real perf budget is the fonts** — three families are a bigger CWV risk than anything a
+starter could fix. Three was challenged and **deliberately kept**, because each has a job:
+
+- **Instrument Serif** — headlines. The identity. Cannot be substituted by anything on the
+  user's machine; it is what stops the site reading as a template.
+- **IBM Plex Mono** — metadata *and the manifest block*. Looks decorative, isn't: the `me.yaml`
+  rendering is the thesis of the project and must read as a real config file. A system mono
+  that is SF Mono on macOS and Consolas on Windows undercuts precisely the effect the About
+  page depends on.
+- **Inter** — body. The weakest case (users cannot distinguish it from their system sans in
+  running copy, and it is the largest download). Kept anyway, consciously, to buy cross-OS
+  typographic consistency on a site where typography *is* the design.
+
+**The budget, enforced:**
+- Instrument Serif — regular + italic only. A display face; headlines need no weight range.
+- Inter — variable, Latin subset. One file covers every weight.
+- IBM Plex Mono — **400 only.** No variable version exists on Google Fonts, so each additional
+  weight is another file, and metadata does not need bold.
+- All self-hosted via `next/font`, `font-display: swap`.
+- **Preload only the two above-the-fold families** (serif + sans). Mono appears below the hero
+  on every page and loads non-blocking.
+
+Target: ~60–80KB of font total. Defensible for a site that ships almost no JavaScript — but it
+is the largest thing on the wire, and it should stay that way by choice, not by drift.
 
 **Rejected:** search (six posts — Cmd+F wins), comments/Giscus (JS payload plus a moderation
 chore), newsletter, KaTeX, citations, series, author pages, multiple layouts, the analytics zoo.
