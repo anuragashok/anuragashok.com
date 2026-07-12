@@ -215,6 +215,31 @@ not a derived one.
 **OG images:** `@vercel/og`, per-post plus a default, rendered from the same tokens as the
 site. This matters for phase-3 LinkedIn syndication — a link without a card gets scrolled past.
 
+## Features ported from timlrx (and the ones rejected)
+
+`timlrx/tailwind-nextjs-starter-blog` was rejected as a base but mined for features.
+
+**Ported:**
+- **JSON-LD** — `BlogPosting` per post, `Person` site-wide.
+- **Prev/next post navigation** at the foot of each essay. The cheapest way to turn one read
+  into two.
+- **Copy-to-clipboard on code blocks.** The content is technical (Dockerfiles, Maven POMs,
+  wiremock configs) — people will copy it. A small amount of JS that clearly earns its place.
+- **Table of contents** on long posts only (the Maven post is 12k). Renders as a quiet sidebar;
+  absent on short posts. Not a boxed widget above the fold.
+- **Tag filtering on `/writing`** — client-side filters, **no new routes**. Tags with nowhere
+  to go are decoration; tag *archive pages* would be a 5th surface that multiplies with the
+  taxonomy. This keeps tags functional and the surface count at four.
+
+**Rejected:** search (six posts — Cmd+F wins), comments/Giscus (JS payload plus a moderation
+chore), newsletter, KaTeX, citations, series, author pages, multiple layouts, the analytics zoo.
+This is the ~70% that would make the site slower and the design someone else's.
+
+**Newsletter, specifically:** deliberately not built. **RSS is the newsletter.** A signup box
+with nobody behind it is a promise owed; the audience here is engineers, who still use readers.
+The feed is therefore first-class, not an afterthought — correct dates, full content, valid
+against a feed validator, and linked from every page.
+
 ## Testing
 
 - **Vitest** — profile schema validation, markdown pipeline, post loading and draft filtering.
