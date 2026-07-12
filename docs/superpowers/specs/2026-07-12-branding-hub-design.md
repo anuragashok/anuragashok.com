@@ -149,6 +149,53 @@ a domain you forgot to renew is content you do not own. Markdown in git is.
 - Two images are unrecoverable: a site-relative SVG in `initial-post` and a hotlinked JPEG in
   `use-docker-for-local-development`. Recreate or drop them during implementation.
 
+## Scaffold
+
+```
+anuragashok.com/
+├── CLAUDE.md
+├── docs/superpowers/specs/
+├── content/posts/*.md          canonical writing (migrated, done)
+├── packages/profile/
+│   ├── me.yaml                 canonical identity
+│   ├── src/schema.ts           zod
+│   └── src/index.ts            parses me.yaml; exports BOTH the typed object
+│                               AND the raw file text
+├── apps/site/
+│   ├── app/                    page.tsx, writing/, about/, feed.xml, og/, not-found
+│   ├── components/             ~8, hand-rolled
+│   ├── lib/                    markdown pipeline, post loading
+│   └── styles/globals.css      Tailwind v4 @theme — the design tokens live here
+├── pnpm-workspace.yaml
+└── package.json                scripts delegate to the workspace
+```
+
+**`packages/profile` exports two things.** The parsed, validated object *and* the raw file
+text. The About page needs the literal bytes. If the raw export doesn't exist from day one,
+someone will eventually re-serialize the object and the manifest silently becomes a lie.
+The Playwright test asserts the rendered block equals the bytes on disk.
+
+**`content/` sits at the repo root, not inside `apps/site`.** It is not the site's content; it
+is Anurag's, and the phase-3 CLI reads it too. Same argument as the profile package. Nesting it
+under the app gives the app ownership, and the thesis leaks.
+
+**No component library.** shadcn/ui, `@base-ui/react`, `class-variance-authority`,
+`tw-animate-css` and `lucide-react` are all dropped. For four pages with a bespoke identity, a
+component library is a liability — its defaults pull toward exactly the templated-Next.js-blog
+look this rebuild exists to escape. ~8 hand-rolled components; inline SVG for the 3–4 icons.
+
+**Dependencies:** `next`, `react`, `tailwindcss` v4, `zod`, `yaml`, `gray-matter`,
+unified/remark/rehype, `shiki`, `feed`, `@vercel/og`, `@vercel/analytics`,
+`@vercel/speed-insights`. Dev: `typescript`, `eslint`, `vitest`, `@playwright/test`.
+Roughly half of what the old site carried.
+
+**Dark mode:** system default + manual toggle, persisted to `localStorage`, with an inline
+head script to set the class before paint (no flash). The dark theme is a designed inversion,
+not a derived one.
+
+**OG images:** `@vercel/og`, per-post plus a default, rendered from the same tokens as the
+site. This matters for phase-3 LinkedIn syndication — a link without a card gets scrolled past.
+
 ## Testing
 
 - **Vitest** — profile schema validation, markdown pipeline, post loading and draft filtering.
@@ -156,6 +203,14 @@ a domain you forgot to renew is content you do not own. Markdown in git is.
   the About page's manifest block matches the contents of `me.yaml` on disk.
 
 That last assertion is worth writing explicitly: it is the test that guards the thesis.
+
+**Pre-commit hook:** typecheck + lint + unit. The fast subset, locally.
+
+**GitHub Actions CI:** typecheck + lint + unit + Playwright, on push. A *check* gate, not a
+deploy gate — Vercel still owns deploys. The distinction matters: CI was deleted in commit
+f8ef151 ("Vercel build is the deploy gate") precisely because it duplicated the deploy. This
+version doesn't; it adds e2e coverage that is too slow for a commit hook, and fails loudly in
+CI rather than quietly in a deployment nobody watches.
 
 ## Infrastructure
 
@@ -172,6 +227,7 @@ for `hello@anuragashok.com`. All tracked as GitHub issues.
 
 None. Post migration is complete; registrar is confirmed (Cloudflare). Implementation can start.
 
-One decision sits outside this repo and is tracked as an issue: **`theoverengineered.blog` is
-for sale.** Anyone can buy the domain his old technical writing is still linked from. Either
-buy it back and 301 it to the new site, or accept the dead inbound links.
+**`theoverengineered.blog` is abandoned deliberately.** It expired and is parked for sale; we
+are not buying it back. `anuragashok.com` is the single identity from here — one domain, one
+source of truth. The link rot from old dev.to / Medium / gist references is an accepted cost.
+The writing itself survives, in git. (Issue #13, closed.)
