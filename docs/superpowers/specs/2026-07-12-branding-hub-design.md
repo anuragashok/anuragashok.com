@@ -231,6 +231,31 @@ site. This matters for phase-3 LinkedIn syndication — a link without a card ge
   to go are decoration; tag *archive pages* would be a 5th surface that multiplies with the
   taxonomy. This keeps tags functional and the surface count at four.
 
+**Performance features ported:** timlrx's perf story is largely just Next.js defaults, but
+three things are worth taking.
+
+- **Markdown images → `next/image`.** timlrx rewrites every markdown `![]()` into a real
+  `next/image` via a remark plugin. This is the biggest genuine win available: automatic
+  sizing, lazy loading, AVIF/WebP. The migrated posts are image-heavy (hero image on all five),
+  and a raw `<img>` is the single largest LCP hazard on a blog. Pairs with velite's local-asset
+  processing: images land in the build, then render optimized.
+- **`@next/bundle-analyzer`** behind `ANALYZE=true`. One dev dep, zero runtime. It is how the
+  "no component library" decision gets *proven* rather than assumed.
+- **Security headers + CSP** — not perf, but the most valuable thing in timlrx's `next.config`.
+  CSP, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`,
+  `Permissions-Policy`. **Ours is far stricter than theirs**: no Giscus, no Umami, no external
+  scripts, therefore no `unsafe-eval` and no third-party origins. A clean CSP is nearly free
+  when you load nobody else's JavaScript.
+
+Not ported: `rehype-preset-minify` (Next already minifies — marginal), and `rehype-prism-plus`,
+which we beat outright — **Shiki highlights at build time and ships zero runtime JS**, while
+Prism ships a highlighter to the browser.
+
+**The real perf budget is the fonts.** Three families (Instrument Serif, Inter, IBM Plex Mono)
+are a bigger CWV risk than anything a starter could fix. Mitigation: `next/font` self-hosting,
+Latin subset only, `font-display: swap`, and preloading only the families used above the fold.
+The locked design is also the perf budget being spent — accept it knowingly.
+
 **Rejected:** search (six posts — Cmd+F wins), comments/Giscus (JS payload plus a moderation
 chore), newsletter, KaTeX, citations, series, author pages, multiple layouts, the analytics zoo.
 This is the ~70% that would make the site slower and the design someone else's.
