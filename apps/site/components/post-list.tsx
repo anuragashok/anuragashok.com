@@ -1,9 +1,6 @@
 import type { Post } from "#velite";
 import Link from "next/link";
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-GB", { month: "short", year: "numeric" }).toUpperCase();
-}
+import { formatDate } from "@/lib/format-date";
 
 export function PostList({ posts }: { posts: Post[] }) {
   return (
