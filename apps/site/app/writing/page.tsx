@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/writing" },
 };
 
+export const dynamic = "force-static";
+
 export default function WritingPage() {
   return (
     <div>

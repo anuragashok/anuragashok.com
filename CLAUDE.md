@@ -76,13 +76,64 @@ posts weren't in git, which is exactly the thing being fixed.
 ## Stack
 
 Next.js 16 (App Router) · Tailwind v4 (CSS-first `@theme`) · TypeScript strict · zod ·
-Shiki · Vitest · Playwright · pnpm workspace · Vercel.
+**velite** (content pipeline) · Shiki · Vitest · Playwright · pnpm workspace · Vercel.
+
+## The build pipeline (read this before touching a build script)
+
+Two generated artifacts stand between a clean clone and a working page. Both are
+gitignored. Neither is optional.
+
+1. **`packages/profile/src/raw.gen.ts`** — `scripts/generate.ts` reads `me.yaml`, validates
+   it against the zod schema (fails the build if it's invalid), and emits the file's exact
+   bytes as a string export. `src/index.ts` imports it; the About page renders it. Produced
+   by `pnpm gen`, which the root `dev` and `build` scripts run **first**. Never make the site
+   build without it — that is how a deploy breaks on a fresh clone while every local check
+   is green.
+2. **`apps/site/.velite/`** — velite compiles `content/posts/*.md` to typed data. Config is
+   `apps/site/velite.config.ts`; consumed via the `#velite` import alias (mapped in
+   `tsconfig.json` and `vitest.config.ts`). Produced by `velite --clean`, wired as `prebuild`
+   / `predev` / part of `typecheck` and `test`. **To add a frontmatter field, edit the
+   collection schema in `velite.config.ts`** — that is the only place it is declared.
+
+Content schema uses velite's `s.toc()` (heading tree — it NESTS, don't flatten it) and
+`s.metadata()` (reading time).
+
+**`NEXT_PUBLIC_BASE_URL` is required for any production build.** `apps/site/lib/site.ts`
+throws without it, on purpose: everything that names the site to the outside world — feed
+links and guids, sitemap, robots' sitemap pointer, canonicals, JSON-LD, OG `metadataBase` —
+derives from it, and a silent `localhost` fallback fails nothing while publishing garbage.
+Dev falls back to localhost. See `.env.example`.
+
+**Every page carries `export const dynamic = "force-static"`.** All four pages, plus
+`robots.ts`, `sitemap.ts`, `feed.xml/route.ts`. The whole site is static; the directive is
+the guard, so that reading a header or a cookie fails the build instead of quietly turning
+a page into a server render.
+
+The locked palette lives in **`apps/site/lib/tokens.ts`**. `globals.css` restates it (CSS
+can't import TS) and the OG cards need hex literals (satori resolves no CSS vars) — a unit
+test fails if the two drift. Edit `tokens.ts`, then make the CSS agree.
 
 ## Gotchas
 
 - **Sandbox breaks TLS and port binding.** `gh`, `pnpm`, `eslint`, `tsc`, `vitest`,
   `next build`, `playwright` — run with `dangerouslyDisableSandbox: true`. Symptoms are
   `x509: failed to verify certificate` and `EPERM` on bind.
+- **`extensionAlias` / `turbopack.resolveAlias` in `next.config.ts` are load-bearing.**
+  `@anuragashok/profile` is consumed as raw TS source (its `exports` points at
+  `./src/index.ts`, never compiled) and its internal imports use NodeNext-style `.js`
+  suffixes for files that exist only as `.ts`. Under `transpilePackages`, neither webpack
+  nor Turbopack resolves that by default. Delete either alias and the site stops resolving
+  `./raw.gen.js`.
+- **rehype plugin order.** In `velite.config.ts`, `rehype-slug` MUST run before
+  `rehype-autolink-headings`: the autolinker needs a pre-existing heading id to build its
+  href, and silently emits no anchor if there isn't one — so every TOC link dies with no
+  error. A unit test asserts the anchor, not just the id, precisely because asserting the id
+  alone would pass either way.
+- **Dates need `timeZone: "UTC"`.** Post frontmatter dates are `YYYY-MM-DD` and parse as UTC
+  midnight; formatting without the explicit timezone rolls back a day — and so possibly a
+  month or a year — on any machine west of UTC. See `lib/format-date.ts`.
+- **Shiki runs at BUILD time**, in velite (posts) and in the `Manifest` server component
+  (`me.yaml`). No runtime highlighter ships. Keep it that way.
 - Vercel: project `anuragashok-com`, scope `anuragashoks-projects`. Deploys via CLI.
 - `ENABLE_EXPERIMENTAL_COREPACK=1` is set in prod so corepack honors `packageManager` in
   `package.json`.

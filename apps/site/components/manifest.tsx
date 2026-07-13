@@ -21,7 +21,6 @@ export async function Manifest({ raw }: { raw: string }) {
       <div
         data-testid="manifest"
         className="manifest-body overflow-x-auto p-3 font-mono text-[0.7rem] leading-[1.9]"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </figure>

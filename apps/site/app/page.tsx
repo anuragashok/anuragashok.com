@@ -3,6 +3,10 @@ import Link from "next/link";
 import { PostList } from "@/components/post-list";
 import { getAllPosts } from "@/lib/posts";
 
+/** Every surface is static. The day someone reads a header or a cookie here, the
+ *  build fails loudly instead of the page quietly becoming a server render. */
+export const dynamic = "force-static";
+
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 5);
   const years = yearsOfExperience(profile.since);

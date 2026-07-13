@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
+export const dynamic = "force-static";
+
 export default function AboutPage() {
   const years = yearsOfExperience(profile.since);
 

@@ -46,9 +46,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Selection is ink on amber. In light mode paper-on-amber (#FAF9F7 on #B45309)
+   clears 4.5:1; in dark the accent lifts to #E0913A and the same paper drops to
+   ~1.9:1 — near-unreadable. Dark selection therefore inverts to ink on amber. */
 ::selection {
   background-color: var(--accent);
   color: var(--color-paper);
+}
+
+.dark ::selection {
+  background-color: var(--accent);
+  color: var(--color-ink);
 }
 
 :focus-visible {

@@ -11,6 +11,8 @@ import { siteConfig } from "@/lib/site";
 /** Posts longer than this get a table of contents. Short ones don't need one. */
 const TOC_MIN_READING_TIME = 5;
 
+export const dynamic = "force-static";
+
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }

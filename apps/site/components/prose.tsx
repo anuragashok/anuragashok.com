@@ -4,7 +4,6 @@ export function Prose({ html }: { html: string }) {
   return (
     <div
       className="prose-custom"
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

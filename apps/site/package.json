@@ -13,7 +13,8 @@
     "typecheck": "velite --clean && tsc --noEmit",
     "test": "velite --clean && vitest run",
     "test:e2e": "playwright test",
-    "analyze": "ANALYZE=true pnpm build"
+    "preanalyze": "velite --clean",
+    "analyze": "ANALYZE=true next build --webpack"
   },
   "dependencies": {
     "@anuragashok/profile": "workspace:*",
