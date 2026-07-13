@@ -7,8 +7,9 @@
   },
   "packageManager": "pnpm@11.0.9",
   "scripts": {
-    "dev": "pnpm --filter @anuragashok/site dev",
-    "build": "pnpm --filter @anuragashok/site build",
+    "gen": "pnpm --filter @anuragashok/profile gen",
+    "dev": "pnpm gen && pnpm --filter @anuragashok/site dev",
+    "build": "pnpm gen && pnpm --filter @anuragashok/site build",
     "start": "pnpm --filter @anuragashok/site start",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
