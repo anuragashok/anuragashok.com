@@ -30,6 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <SiteFooter />
         </div>
+        {/* Web Analytics must be toggled ON in the Vercel project dashboard (Analytics
+            tab) for this to do anything. Until then it 404s on
+            /_vercel/insights/script.js on every page load — harmless, but noisy in
+            the console. The component stays: enabling analytics is a dashboard flip,
+            not a code change. */}
         <Analytics />
         <SpeedInsights />
       </body>
