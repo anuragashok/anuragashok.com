@@ -1,5 +1,6 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
+import { POST_IMAGE_QUALITY, POST_IMAGE_WIDTHS } from "./lib/image-sizes";
 
 // Strict because we load nobody else's JavaScript. No third-party origins,
 // no unsafe-eval. 'unsafe-inline' on style-src is required by Next's inlined
@@ -28,6 +29,13 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // NEVER set output: 'export' — it disables next/image optimization and headers().
   transpilePackages: ["@anuragashok/profile"],
+  // The optimizer 400s on any width/quality not listed here, which renders as a
+  // broken <img> with nothing in the build log. The post-image srcset is built
+  // from these exact constants (lib/image-sizes.ts) so the two cannot disagree.
+  images: {
+    deviceSizes: [...POST_IMAGE_WIDTHS],
+    qualities: [POST_IMAGE_QUALITY],
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

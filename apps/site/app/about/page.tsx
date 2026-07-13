@@ -32,21 +32,26 @@ export default function AboutPage() {
 
       <h1 className="mb-8 font-serif text-4xl tracking-tight">About</h1>
 
+      {/* Typographic apostrophes (’), not `&apos;`. Not only for the typography:
+          SWC drops the LEADING SPACE of any JSX text chunk that both sits next to
+          an expression and contains an HTML entity — which silently rendered
+          "Fulfillment Dispatch— the system" and "13years in" on this page. Home,
+          with the same JSX shape but no entities, was unaffected, which is what
+          made it easy to miss. Keep entities out of JSX text here. */}
       <div className="max-w-[52ch] space-y-4 leading-relaxed">
         <p>
-          I&apos;m a {profile.role} at {profile.company} in {profile.location}, on {profile.team} — the
-          system that matches supply to demand across Southeast Asia. I&apos;ve been writing software since{" "}
+          I’m a {profile.role} at {profile.company} in {profile.location}, on {profile.team} — the system
+          that matches supply to demand across Southeast Asia. I’ve been writing software since{" "}
           {formatMonth(profile.since)}, and I intend to keep doing exactly that. Individual contributor, by
           choice.
         </p>
         <p>
-          The thread through all of it is automation. If I do a thing twice, I&apos;d rather describe it once
-          and let the machine do it. That instinct became infrastructure-as-code, then everything-as-code, and
-          lately it&apos;s become agentic coding — which is the same instinct with a much better executor.
+          The thread through all of it is automation. If I do a thing twice, I’d rather describe it once and
+          let the machine do it. That instinct became infrastructure-as-code, then everything-as-code, and
+          lately it’s become agentic coding — which is the same instinct with a much better executor.
         </p>
         <p>
-          {years} years in, that&apos;s still the whole job: make the work describable, then make it run
-          itself.
+          {years} years in, that’s still the whole job: make the work describable, then make it run itself.
         </p>
         <p>This site runs on that idea too. Everything below is generated from a single file in the repo:</p>
       </div>

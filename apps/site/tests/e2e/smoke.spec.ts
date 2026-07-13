@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { profile } from "@anuragashok/profile";
 import { expect, test } from "@playwright/test";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
@@ -37,8 +38,18 @@ test("writing index lists every post, and has no tag filter", async ({ page }) =
 
 test("about derives its prose from me.yaml, not from hand-typed copy", async ({ page }) => {
   await page.goto("/about");
+
   // me.yaml says `since: 2013-02`; the page must say February 2013 because of it.
   await expect(page.getByText(/writing software since February 2013/)).toBeVisible();
+
+  // Interpolated facts must keep the space that separates them from the prose.
+  // SWC drops the leading space of a JSX text chunk that sits next to an
+  // expression AND contains an HTML entity, which shipped "Fulfillment Dispatch—
+  // the system" and "13years in" to the page. Nothing failed; it just read wrong.
+  const prose = await page.locator("main div.max-w-\\[52ch\\]").innerText();
+  expect(prose).toContain(`on ${profile.team} — the system`);
+  expect(prose).toMatch(/\d+ years in, that/);
+  expect(prose).not.toMatch(/\S—/); // no word jammed against an em dash
 });
 
 test("a post renders with highlighted code and prev/next", async ({ page }) => {
@@ -46,6 +57,23 @@ test("a post renders with highlighted code and prev/next", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Capture response time");
   await expect(page.locator("pre.shiki").first()).toBeVisible();
   await expect(page.getByText("OLDER")).toBeVisible();
+});
+
+test("post images actually load through the optimizer", async ({ page }) => {
+  // Every post image was broken in production: the srcset asked the optimizer for
+  // widths that weren't in `images.deviceSizes`, so it answered 400. A 400 on an
+  // <img> is a broken image and NOTHING else — the build passes, the HTML looks
+  // right, and only a human looking at the page ever finds out. So: assert pixels.
+  await page.goto("/writing/publishing-my-first-artifact-to-maven-central-using-github-actions");
+
+  const img = page.locator(".prose-custom img").first();
+  await img.scrollIntoViewIfNeeded();
+  await expect(img).toBeVisible();
+
+  const decoded = await img.evaluate(
+    (el: HTMLImageElement) => el.decode().then(() => el.naturalWidth).catch(() => 0),
+  );
+  expect(decoded).toBeGreaterThan(0);
 });
 
 test("THE THESIS: the About manifest is byte-identical to me.yaml on disk", async ({ page }) => {
