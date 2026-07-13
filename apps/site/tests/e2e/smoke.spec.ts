@@ -59,6 +59,60 @@ test("a post renders with highlighted code and prev/next", async ({ page }) => {
   await expect(page.getByText("OLDER")).toBeVisible();
 });
 
+// @shikijs/rehype runs with `defaultColor: false`, which means the rendered
+// HTML carries ONLY CSS custom properties (--shiki-light, --shiki-dark) and
+// NEVER an inline `color`. Nothing in globals.css consumed --shiki-light, so
+// every visitor in light mode — the default for most people — saw flat black
+// monospace on every code block on the site, including the me.yaml manifest
+// on /about. `pre.shiki` being present and visible (the assertion above) says
+// nothing about whether it's actually coloured, which is exactly how this
+// shipped past every prior gate. These assertions read the COMPUTED colour of
+// an actual token span and require it to differ from the body's ink colour —
+// the only way that can be true is if a theme's Shiki CSS vars are wired up.
+async function setColorScheme(page: import("@playwright/test").Page, scheme: "light" | "dark") {
+  // The site decides its theme from `localStorage.theme`, falling back to
+  // `prefers-color-scheme` (see components/theme-script.tsx). No localStorage
+  // is set here, so emulating the OS colour scheme is what actually drives
+  // the site's own theme decision — not a synthetic `.dark` class toggle.
+  await page.emulateMedia({ colorScheme: scheme });
+}
+
+async function firstTokenColor(page: import("@playwright/test").Page, containerSelector: string) {
+  // A Shiki token span: a leaf span (no element children) carrying real text,
+  // nested inside the highlighted <pre>. The outer `.line` spans wrap these.
+  const span = page.locator(`${containerSelector} span`).filter({ hasText: /\S/ }).first();
+  await expect(span).toBeVisible();
+  return span.evaluate((el) => getComputedStyle(el).color);
+}
+
+async function bodyInkColor(page: import("@playwright/test").Page) {
+  return page.evaluate(() => getComputedStyle(document.body).color);
+}
+
+for (const scheme of ["light", "dark"] as const) {
+  test(`post code blocks are genuinely syntax-highlighted, not flat ink, in ${scheme} mode`, async ({ page }) => {
+    await setColorScheme(page, scheme);
+    await page.goto("/writing/capture-response-time-in-wiremock-recordings");
+
+    const tokenColor = await firstTokenColor(page, "pre.shiki");
+    const inkColor = await bodyInkColor(page);
+
+    expect(tokenColor).not.toBe(inkColor);
+  });
+
+  test(`the /about manifest (me.yaml) is genuinely syntax-highlighted, not flat ink, in ${scheme} mode`, async ({
+    page,
+  }) => {
+    await setColorScheme(page, scheme);
+    await page.goto("/about");
+
+    const tokenColor = await firstTokenColor(page, '[data-testid="manifest"]');
+    const inkColor = await bodyInkColor(page);
+
+    expect(tokenColor).not.toBe(inkColor);
+  });
+}
+
 test("post images actually load through the optimizer", async ({ page }) => {
   // Every post image was broken in production: the srcset asked the optimizer for
   // widths that weren't in `images.deviceSizes`, so it answered 400. A 400 on an

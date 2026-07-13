@@ -64,8 +64,23 @@ body {
   outline-offset: 2px;
 }
 
-/* Shiki dual-theme: @shikijs/rehype with defaultColor:false emits CSS vars only.
-   Without this block, code blocks are invisible in dark mode. */
+/* Shiki dual-theme: @shikijs/rehype with defaultColor:false emits CSS vars only
+   (--shiki-light*, --shiki-dark*) and never an inline `color`. Without BOTH
+   blocks below, code blocks are flat, uncoloured ink — invisible in dark mode
+   (no light-on-dark contrast) and merely undifferentiated in light mode (still
+   "visible", just monochrome). The light rule must come first: `html.dark
+   .shiki` has higher specificity (two classes vs one) than `.shiki` alone, so
+   it wins under `.dark` regardless of order — but ordering it second here
+   keeps the cascade legible. */
+.shiki,
+.shiki span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
 html.dark .shiki,
 html.dark .shiki span {
   color: var(--shiki-dark) !important;
@@ -157,5 +172,20 @@ html.dark .shiki span {
 
 .manifest-body pre {
   margin: 0;
+}
+
+/* Shiki's `.shiki` / `.shiki span` rules (both themes, above) paint a
+   background on the <pre> AND on every line/token span — normally invisible
+   because both resolve to the same colour, so the per-line boxes blend into
+   one solid rect. The manifest card supplies its own paper background, so its
+   <pre> is forced transparent — but that alone only wins the specificity race
+   on the <pre> itself (0,1,1 / 0,2,2), leaving the untouched spans (0,1,1 /
+   0,2,2 dark) to paint their own background and band each line. These
+   selectors go one level of specificity higher than each enemy, on both
+   pre and span, in both themes. */
+.manifest-body pre,
+.manifest-body pre span,
+html.dark .manifest-body pre,
+html.dark .manifest-body pre span {
   background: transparent !important;
 }

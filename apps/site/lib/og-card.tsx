@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import type { HeadlineParts } from "@anuragashok/profile";
 import { ImageResponse } from "next/og";
 import { palette } from "./tokens";
 
@@ -27,7 +28,13 @@ export function renderOgCard({
   titleLineHeight,
 }: {
   eyebrow: string;
-  title: string;
+  /**
+   * A plain string renders flat, like a post title. `HeadlineParts` (from
+   * `splitHeadline`) renders `accent` in the same burnt amber the homepage
+   * uses for `headline_accent` — so the two most visible copies of the
+   * headline, the hero and the OG card, agree on which word is emphasised.
+   */
+  title: string | HeadlineParts;
   titleFontSize: number;
   titleLetterSpacing: number;
   titleLineHeight?: number;
@@ -64,10 +71,25 @@ export function renderOgCard({
             fontFamily: "Instrument Serif",
             fontSize: titleFontSize,
             letterSpacing: titleLetterSpacing,
+            // Satori boxes each JSX child of a flex container as its own flex
+            // item, which drops the ordinary HTML whitespace-collapsing that
+            // would otherwise keep a single space between adjacent text nodes
+            // and the <span> — "I make " + <span>code</span> + " work." was
+            // rendering as "makecodework." with the spaces silently eaten.
+            // `pre` renders the literal characters in each text node instead.
+            whiteSpace: "pre",
             ...(titleLineHeight ? { lineHeight: titleLineHeight } : {}),
           }}
         >
-          {title}
+          {typeof title === "string" ? (
+            title
+          ) : (
+            <>
+              {title.before}
+              <span style={{ color: palette.accent }}>{title.accent}</span>
+              {title.after}
+            </>
+          )}
         </div>
         <div
           style={{
