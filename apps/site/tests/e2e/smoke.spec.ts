@@ -130,6 +130,21 @@ test("post images actually load through the optimizer", async ({ page }) => {
   expect(decoded).toBeGreaterThan(0);
 });
 
+test("the hero (first) image on a post loads eagerly at high priority, not lazily", async ({ page }) => {
+  // The hero image is almost always the LCP element — it sits above the fold.
+  // rehype-optimize-images used to mark EVERY image `loading="lazy"`, including
+  // this one, which delays the browser from even discovering it until layout is
+  // further along. That's a self-inflicted LCP regression on every post. Assert
+  // the actual HTML attributes (not just that the image loads — the previous e2e
+  // image test already covers that) so a regression here fails a test, not just
+  // a human staring at a waterfall.
+  await page.goto("/writing/publishing-my-first-artifact-to-maven-central-using-github-actions");
+
+  const heroImg = page.locator(".prose-custom img").first();
+  await expect(heroImg).toHaveAttribute("loading", "eager");
+  await expect(heroImg).toHaveAttribute("fetchpriority", "high");
+});
+
 test("THE THESIS: the About manifest is byte-identical to me.yaml on disk", async ({ page }) => {
   await page.goto("/about");
 
