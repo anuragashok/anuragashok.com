@@ -140,6 +140,25 @@ test fails if the two drift. Edit `tokens.ts`, then make the CSS agree.
   month or a year — on any machine west of UTC. See `lib/format-date.ts`.
 - **Shiki runs at BUILD time**, in velite (posts) and in the `Manifest` server component
   (`me.yaml`). No runtime highlighter ships. Keep it that way.
-- Vercel: project `anuragashok-com`, scope `anuragashoks-projects`. Deploys via CLI.
-- `ENABLE_EXPERIMENTAL_COREPACK=1` is set in prod so corepack honors `packageManager` in
+## Deploying (read before touching Vercel config)
+
+Vercel project `anuragashok-com`, scope `anuragashoks-projects`. **Root Directory is
+`apps/site`.** Auto-deploy via the GitHub App: **preview on PR, production on merge to
+`main`.** Don't deploy from the CLI by hand unless you mean to.
+
+- **`vercel.json` lives in `apps/site/`, NOT the repo root.** Vercel reads it from the *Root
+  Directory*. A `vercel.json` at the repo root is silently ignored — the build falls back to
+  `apps/site`'s own `pnpm build`, which skips `packages/profile`'s codegen, and the deploy
+  dies on `Can't resolve ./raw.gen.js`. The CLI, by contrast, reads `vercel.json` from the
+  current directory — so a root `vercel.json` makes CLI deploys pass while Git deploys fail.
+  This exact split cost a broken production build; don't reintroduce it.
+- **The build command must run the profile codegen first:**
+  `pnpm --filter @anuragashok/profile gen && pnpm build`. It is set in
+  `apps/site/vercel.json` *and* at the project level, deliberately.
+- **Node 22+.** pnpm 11 requires `>=22.13`. `.nvmrc`, `engines`, CI, and Vercel are all on
+  22. CI was pinned to 20 for a while and failed at `setup-node` on every run — it passed
+  locally only because the dev machine is on 22+.
+- **`NEXT_PUBLIC_BASE_URL` must be set for BOTH Production and Preview** (`https://anuragashok.com`).
+  The build throws without it, on purpose. `ENABLE_EXPERIMENTAL_COREPACK=1` likewise, so
+  corepack honors `packageManager` in
   `package.json`.
