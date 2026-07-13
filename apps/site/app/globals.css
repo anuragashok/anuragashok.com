@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* The locked palette. One accent. Do not add a second. */
+  --color-paper: #faf9f7;
+  --color-ink: #16150f;
+  --color-accent: #b45309;
+
+  /* Dark mode is a designed inversion, not a derived one. */
+  --color-paper-dark: #111110;
+  --color-ink-dark: #ebe9e4;
+  --color-accent-dark: #e0913a;
+
+  --color-muted: #78716c;
+  --color-muted-dark: #8f887f;
+  --color-rule: #e7e5e4;
+  --color-rule-dark: #2a2825;
+
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+}
+
+:root {
+  --bg: var(--color-paper);
+  --fg: var(--color-ink);
+  --muted: var(--color-muted);
+  --accent: var(--color-accent);
+  --rule: var(--color-rule);
+}
+
+.dark {
+  --bg: var(--color-paper-dark);
+  --fg: var(--color-ink-dark);
+  --muted: var(--color-muted-dark);
+  --accent: var(--color-accent-dark);
+  --rule: var(--color-rule-dark);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Selection is ink on amber. In light mode paper-on-amber (#FAF9F7 on #B45309)
+   clears 4.5:1; in dark the accent lifts to #E0913A and the same paper drops to
+   ~1.9:1 — near-unreadable. Dark selection therefore inverts to ink on amber. */
+::selection {
+  background-color: var(--accent);
+  color: var(--color-paper);
+}
+
+.dark ::selection {
+  background-color: var(--accent);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Shiki dual-theme: @shikijs/rehype with defaultColor:false emits CSS vars only
+   (--shiki-light*, --shiki-dark*) and never an inline `color`. Without BOTH
+   blocks below, code blocks are flat, uncoloured ink — invisible in dark mode
+   (no light-on-dark contrast) and merely undifferentiated in light mode (still
+   "visible", just monochrome). The light rule must come first: `html.dark
+   .shiki` has higher specificity (two classes vs one) than `.shiki` alone, so
+   it wins under `.dark` regardless of order — but ordering it second here
+   keeps the cascade legible. */
+.shiki,
+.shiki span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Editorial prose. Hand-rolled — no @tailwindcss/typography, whose defaults
+   pull toward exactly the templated look this rebuild exists to escape. */
+.prose-custom {
+  line-height: 1.75;
+}
+.prose-custom p,
+.prose-custom ul,
+.prose-custom ol {
+  margin: 0 0 1.15rem;
+}
+.prose-custom h2,
+.prose-custom h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 2.25rem 0 0.75rem;
+  scroll-margin-top: 2rem;
+}
+.prose-custom h2 { font-size: 1.35rem; }
+.prose-custom h3 { font-size: 1.1rem; }
+.prose-custom h2 a,
+.prose-custom h3 a { color: inherit; text-decoration: none; }
+.prose-custom h6 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin: 1.25rem 0 0.35rem;
+}
+.prose-custom a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-custom ul { list-style: disc; padding-left: 1.25rem; }
+.prose-custom ol { list-style: decimal; padding-left: 1.25rem; }
+.prose-custom li { margin: 0.3rem 0; }
+.prose-custom img { border-radius: 4px; margin: 1.5rem 0; }
+.prose-custom hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+.prose-custom blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  color: var(--muted);
+  margin: 0 0 1.15rem;
+}
+.prose-custom :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: color-mix(in oklch, var(--fg) 7%, transparent);
+  padding: 0.12em 0.35em;
+  border-radius: 3px;
+}
+.prose-custom pre {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0 0 1.15rem;
+  border: 1px solid var(--rule);
+  position: relative;
+}
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.15rem 0.4rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+  cursor: pointer;
+}
+.prose-custom pre:hover .copy-btn,
+.copy-btn:focus-visible { opacity: 1; }
+
+.manifest-body pre {
+  margin: 0;
+}
+
+/* Shiki's `.shiki` / `.shiki span` rules (both themes, above) paint a
+   background on the <pre> AND on every line/token span — normally invisible
+   because both resolve to the same colour, so the per-line boxes blend into
+   one solid rect. The manifest card supplies its own paper background, so its
+   <pre> is forced transparent — but that alone only wins the specificity race
+   on the <pre> itself (0,1,1 / 0,2,2), leaving the untouched spans (0,1,1 /
+   0,2,2 dark) to paint their own background and band each line. These
+   selectors go one level of specificity higher than each enemy, on both
+   pre and span, in both themes. */
+.manifest-body pre,
+.manifest-body pre span,
+html.dark .manifest-body pre,
+html.dark .manifest-body pre span {
+  background: transparent !important;
+}

@@ -1,36 +1,45 @@
 # anuragashok.com
 
-Personal site and blog. Next.js (App Router), Tailwind v4, shadcn/ui, deployed on Vercel.
+Everything-as-code, applied to a person.
 
-## Local development
+`packages/profile` is the canonical source of truth — `me.yaml` plus a zod schema.
+`content/posts` is the canonical writing. `apps/site` is a Next.js renderer that
+imports both and owns neither.
 
-```bash
-pnpm install
-pnpm dev
-```
+The website is the first renderer of that source of truth. It is not the source of truth.
 
-Open http://localhost:3000.
+## Develop
 
-## Writing a post
+    pnpm install
+    pnpm dev
 
-Add a Markdown file under `content/posts/`. Filename = slug (kebab-case).
+## Environment
 
-```md
----
-title: "Title"
-date: 2026-05-09
-summary: "Short blurb."
-tags: ["topic"]
----
+| Var | Required | Notes |
+| --- | --- | --- |
+| `NEXT_PUBLIC_BASE_URL` | Production builds | The public origin, no trailing slash. Feed links, sitemap, robots, canonicals, JSON-LD and OG `metadataBase` all derive from it. A production build **throws** without it rather than silently shipping `localhost`. `pnpm dev` falls back to `http://localhost:3000`. |
 
-Body…
-```
+See `.env.example`. For a local production build, copy it to `.env.local`.
 
-`draft: true` excludes the post from production builds but shows it in `pnpm dev`.
+## Write
+
+Add a Markdown file to `content/posts/`. Filename = slug.
+
+    ---
+    title: "Title"
+    date: 2026-07-12
+    summary: "Short blurb."
+    tags: ["topic"]
+    ---
+
+    Body…
+
+`draft: true` hides a post in production and shows it in dev.
 
 ## Scripts
 
 - `pnpm dev` — dev server
-- `pnpm build` — production build
+- `pnpm gen` — regenerate `packages/profile/src/raw.gen.ts` from `me.yaml` (gitignored; `dev`/`build` run it for you)
+- `pnpm build` — production build (what Vercel runs)
 - `pnpm check` — typecheck + lint + unit tests
-- `pnpm test:e2e` — Playwright smoke tests against `pnpm build && pnpm start`
+- `pnpm test:e2e` — Playwright against the production build
