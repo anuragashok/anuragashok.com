@@ -1,6 +1,13 @@
-const IMG_TAG_RE = /<img\b[^>]*>/gi;
-const A_TAG_RE = /<a\b[^>]*>/gi;
-const ATTR_RE = (name: string) => new RegExp(`(\\s${name}=")([^"]*)(")`, "i");
+// `[^>"']|"[^"]*"|'[^']*'` walks either a bare (non-quote, non-`>`) character or a fully-quoted
+// attribute value, so an unescaped `>` inside a quoted attribute (e.g. human-authored `alt` text
+// like `alt="Before -> after"`) doesn't prematurely end the tag match. `hast-util-to-html` escapes
+// `"` and `&` in attribute values but NOT `>` (spec-compliant), so this is a real, live case.
+const IMG_TAG_RE = /<img\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi;
+const A_TAG_RE = /<a\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi;
+// Matches a double- or single-quoted attribute value. `hast-util-to-html` always emits
+// double quotes, but tests (and any hand-written HTML that slips through) may use single
+// quotes, so both are supported on read; writes always canonicalize to double quotes.
+const ATTR_RE = (name: string) => new RegExp(`\\s${name}=(?:"([^"]*)"|'([^']*)')`, "i");
 
 /** Decodes the small set of HTML entities that can appear inside a serialized attribute value. */
 function decodeHtmlEntities(value: string): string {
@@ -17,7 +24,9 @@ function decodeHtmlEntities(value: string): string {
 
 function getAttr(tag: string, name: string): string | null {
   const match = tag.match(ATTR_RE(name));
-  return match ? decodeHtmlEntities(match[2]!) : null;
+  if (!match) return null;
+  const raw = match[1] ?? match[2] ?? "";
+  return decodeHtmlEntities(raw);
 }
 
 /** Mirrors how the upstream serializer escapes attribute values, so re-serialization stays valid. */
@@ -27,14 +36,16 @@ function encodeAttrValue(value: string): string {
 
 function setAttr(tag: string, name: string, value: string): string {
   const encoded = encodeAttrValue(value);
+  // Always canonicalize the written attribute to double quotes, regardless of what quote style
+  // (or none) the source tag used — this matches how `hast-util-to-html` always serializes.
   if (ATTR_RE(name).test(tag)) {
-    return tag.replace(ATTR_RE(name), (_m, pre: string, _val: string, post: string) => `${pre}${encoded}${post}`);
+    return tag.replace(ATTR_RE(name), ` ${name}="${encoded}"`);
   }
   return tag.replace(/^<(\w+)/, `<$1 ${name}="${encoded}"`);
 }
 
 function removeAttr(tag: string, name: string): string {
-  return tag.replace(new RegExp(`\\s${name}="[^"]*"`, "i"), "");
+  return tag.replace(ATTR_RE(name), "");
 }
 
 function joinUrl(baseUrl: string, rootRelativePath: string): string {
@@ -64,8 +75,16 @@ function absolutizeUrl(url: string, baseUrl: string): string {
 function resolveImageSrc(src: string, baseUrl: string): string {
   const optimizerMatch = src.match(/^\/_next\/image\?url=([^&]+)(?:&.*)?$/);
   if (optimizerMatch) {
-    const originalPath = decodeURIComponent(optimizerMatch[1]!);
-    return absolutizeUrl(originalPath, baseUrl);
+    // A malformed percent-encoding (e.g. a lone `%E0` truncated mid-sequence) throws a URIError.
+    // This runs synchronously inside the feed route's GET() handler, so an uncaught throw here
+    // would 500 the ENTIRE feed over one bad image, not just degrade that one image. Degrade
+    // gracefully instead: fall back to absolutizing the raw (still root-relative) optimizer URL.
+    try {
+      const originalPath = decodeURIComponent(optimizerMatch[1]!);
+      return absolutizeUrl(originalPath, baseUrl);
+    } catch {
+      return absolutizeUrl(src, baseUrl);
+    }
   }
   return absolutizeUrl(src, baseUrl);
 }
