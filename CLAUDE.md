@@ -24,12 +24,16 @@ confirmation.**
 2. **Branch, then open a PR.** Never commit to `main`. The PR automatically gets a Vercel
    preview deployment and a CI run.
 
-3. **Test the preview deployment**, not just the local build. Preview deploys sit behind
-   Vercel's deployment protection, so a plain browser or `curl` hits a login wall — use:
+3. **Test the preview deployment**, not just the local build. Vercel Authentication is
+   **disabled for previews**, so preview URLs open directly — plain `curl` and a browser both
+   work, no bypass needed. (A protection-bypass secret also exists on the project for
+   automation; `vercel curl <path> --deployment <url>` uses it if protection is ever
+   re-enabled.) Confirm CI and the Vercel check are both green: `gh pr checks <n>`.
+
+   Get the preview URL for the current branch with:
    ```
-   vercel curl /some/path --deployment <preview-url>
+   vercel api "/v6/deployments?projectId=<id>&limit=5"   # match on meta.githubCommitRef
    ```
-   Confirm CI and the Vercel check are both green: `gh pr checks <n>`.
 
 4. **Give Anurag the preview URL, and stop.** Report what changed and what you verified.
    **Wait for his explicit confirmation.** Do not merge on your own judgment.
