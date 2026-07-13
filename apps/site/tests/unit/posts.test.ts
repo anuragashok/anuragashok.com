@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAdjacentPosts, getAllPosts, getAllTags, getPostBySlug } from "@/lib/posts";
+import { getAdjacentPosts, getAllPosts, getPostBySlug } from "@/lib/posts";
 
 describe("posts", () => {
   it("loads the migrated posts", () => {
@@ -50,8 +50,12 @@ describe("posts", () => {
     expect(post?.metadata.readingTime).toBeGreaterThan(0);
   });
 
-  it("collects tags across posts", () => {
-    expect(getAllTags()).toContain("wiremock");
+  it("keeps tags in frontmatter even though nothing renders them as a filter", () => {
+    // The tag-filter UI is gone (5 posts, 16 tags — the filter was longer than
+    // the list). The DATA stays: the schema keeps `tags`, so the filter can come
+    // back without a content migration when the corpus justifies it.
+    const post = getPostBySlug("capture-response-time-in-wiremock-recordings");
+    expect(post?.tags).toContain("wiremock");
   });
 
   it("returns adjacent posts for prev/next navigation", () => {

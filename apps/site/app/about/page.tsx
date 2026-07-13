@@ -1,6 +1,7 @@
 import { profile, rawProfile, yearsOfExperience } from "@anuragashok/profile";
 import type { Metadata } from "next";
 import { Manifest } from "@/components/manifest";
+import { formatMonth } from "@/lib/format-date";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -34,8 +35,9 @@ export default function AboutPage() {
       <div className="max-w-[52ch] space-y-4 leading-relaxed">
         <p>
           I&apos;m a {profile.role} at {profile.company} in {profile.location}, on {profile.team} — the
-          system that matches supply to demand across Southeast Asia. I&apos;ve been writing software since
-          February 2013, and I intend to keep doing exactly that. Individual contributor, by choice.
+          system that matches supply to demand across Southeast Asia. I&apos;ve been writing software since{" "}
+          {formatMonth(profile.since)}, and I intend to keep doing exactly that. Individual contributor, by
+          choice.
         </p>
         <p>
           The thread through all of it is automation. If I do a thing twice, I&apos;d rather describe it once

@@ -6,21 +6,39 @@ import { expect, test } from "@playwright/test";
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 const meYaml = readFileSync(join(repoRoot, "packages", "profile", "me.yaml"), "utf8");
 
-test("home renders the hero and recent writing", async ({ page }) => {
+// Read the expected copy out of the FILE, not out of a fixture. If the headline
+// in me.yaml changes and the homepage doesn't follow, this fails — which is the
+// point: the hero is a renderer of the profile, not a copy of it.
+const expected = (key: string) => meYaml.match(new RegExp(`^${key}:\\s*(.+?)\\s*(?:#.*)?$`, "m"))?.[1] ?? "";
+
+test("home renders the headline FROM me.yaml, with its accent word highlighted", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("I make");
+
+  const headline = expected("headline");
+  expect(headline).not.toBe("");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(headline);
+
+  // The one amber word is named by me.yaml too, not chosen by the renderer.
+  await expect(page.locator("h1 em")).toHaveText(expected("headline_accent"));
+
   await expect(page.getByRole("link", { name: /all writing/i })).toBeVisible();
 });
 
-test("writing index lists posts and filters by tag", async ({ page }) => {
+test("writing index lists every post, and has no tag filter", async ({ page }) => {
   await page.goto("/writing");
-  const before = await page.locator("main li").count();
-  expect(before).toBeGreaterThanOrEqual(5);
 
-  await page.getByRole("button", { name: "#wiremock" }).click();
-  const after = await page.locator("main li").count();
-  expect(after).toBeLessThan(before);
-  expect(after).toBeGreaterThan(0);
+  await expect(page.locator("main li")).toHaveCount(5);
+  await expect(page.getByRole("link", { name: "Capture response time in wiremock recordings" })).toBeVisible();
+
+  // The tag filter is gone: 16 tags for 5 posts was a control surface longer
+  // than the thing it controlled. No buttons on this page at all.
+  await expect(page.locator("main button")).toHaveCount(0);
+});
+
+test("about derives its prose from me.yaml, not from hand-typed copy", async ({ page }) => {
+  await page.goto("/about");
+  // me.yaml says `since: 2013-02`; the page must say February 2013 because of it.
+  await expect(page.getByText(/writing software since February 2013/)).toBeVisible();
 });
 
 test("a post renders with highlighted code and prev/next", async ({ page }) => {

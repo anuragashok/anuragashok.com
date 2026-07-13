@@ -1,5 +1,6 @@
 import { profile, yearsOfExperience } from "@anuragashok/profile";
 import Link from "next/link";
+import { Headline } from "@/components/headline";
 import { PostList } from "@/components/post-list";
 import { getAllPosts } from "@/lib/posts";
 
@@ -17,9 +18,7 @@ export default function HomePage() {
         <p className="mb-4 font-mono text-[0.65rem] tracking-[0.11em] text-[var(--muted)]">
           {profile.role.toUpperCase()} · {profile.company.toUpperCase()} · {profile.location.toUpperCase()}
         </p>
-        <h1 className="mb-5 font-serif text-5xl leading-[1.05] tracking-tight">
-          I make <em className="text-[var(--accent)] not-italic">code</em> work.
-        </h1>
+        <Headline profile={profile} />
         <p className="max-w-[46ch] leading-relaxed text-[var(--muted)]">
           {years} years of it. Today I build dispatch at {profile.company} — deciding, thousands of times a
           second, which driver meets which demand. I care about automation, everything-as-code, and what

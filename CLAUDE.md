@@ -31,6 +31,12 @@ contents of `me.yaml`**, syntax-highlighted — not a re-serialization of a pars
 thing on screen is the thing in git. There is a Playwright test guarding this. Do not "simplify"
 it away.
 
+Second corollary: **the editorial copy is derived, not typed.** The homepage headline is
+`profile.headline` with `profile.headline_accent` set in amber; the About page's "February 2013"
+is `profile.since`; the years count is computed. Change `me.yaml`, and the pages change. Unit
+and e2e tests assert this against the file. Never re-hardcode a fact that lives in the profile —
+a string typed into JSX is the exact thing this project claims not to do.
+
 ## Who Anurag is (keep this accurate)
 
 - Lead Software Engineer at **Grab**, Singapore — team **Fulfillment Dispatch** (matching supply

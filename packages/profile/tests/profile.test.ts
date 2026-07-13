@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
-import { ProfileSchema, profile, rawProfile, yearsOfExperience } from "../src/index.js";
+import { ProfileSchema, profile, rawProfile, splitHeadline, yearsOfExperience } from "../src/index.js";
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const meYaml = readFileSync(join(pkgRoot, "me.yaml"), "utf8");
@@ -35,6 +35,25 @@ describe("profile", () => {
   it("rejects a malformed since", () => {
     const bad = { ...parse(meYaml), since: "2013" };
     expect(() => ProfileSchema.parse(bad)).toThrow();
+  });
+
+  it("rejects an accent word that isn't in the headline", () => {
+    // Otherwise the homepage renders a headline with nothing emphasised, silently.
+    const bad = { ...parse(meYaml), headline_accent: "kubernetes" };
+    expect(() => ProfileSchema.parse(bad)).toThrow();
+  });
+
+  it("splits the headline around its accent word", () => {
+    expect(splitHeadline({ headline: "I make code work.", headline_accent: "code" })).toEqual({
+      before: "I make ",
+      accent: "code",
+      after: " work.",
+    });
+  });
+
+  it("reassembles the real headline exactly — the site prints the parts, not the source", () => {
+    const { before, accent, after } = splitHeadline(profile);
+    expect(before + accent + after).toBe(profile.headline);
   });
 
   it("computes whole years of experience", () => {

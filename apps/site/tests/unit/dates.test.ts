@@ -1,5 +1,6 @@
+import { profile } from "@anuragashok/profile";
 import { describe, expect, it } from "vitest";
-import { formatDate, formatDateLong } from "@/lib/format-date";
+import { formatDate, formatDateLong, formatMonth } from "@/lib/format-date";
 
 describe("formatDate", () => {
   it("renders a month-boundary date as the calendar date in the frontmatter, not the host-timezone-shifted date", () => {
@@ -12,6 +13,20 @@ describe("formatDate", () => {
     // actually written in the post frontmatter, regardless of where the
     // code runs.
     expect(formatDate("2021-01-01")).toBe("JAN 2021");
+  });
+});
+
+describe("formatMonth", () => {
+  it("renders me.yaml's `since` as the prose the About page prints", () => {
+    // The About page used to say "February 2013" in hand-typed JSX. It now
+    // derives it, so editing `since` in me.yaml moves the sentence.
+    expect(formatMonth(profile.since)).toBe("February 2013");
+  });
+
+  it("does not roll a first-of-month back into the previous month", () => {
+    // Same UTC bug class as the two suites around it: constructing the 1st in
+    // local time, west of UTC, lands in the previous month.
+    expect(formatMonth("2013-01")).toBe("January 2013");
   });
 });
 

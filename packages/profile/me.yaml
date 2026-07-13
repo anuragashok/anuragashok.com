@@ -4,6 +4,7 @@
 
 name: Anurag Ashok
 headline: I make code work.
+headline_accent: code # the one word a renderer sets in the accent colour
 
 role: Lead Software Engineer
 company: Grab

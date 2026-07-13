@@ -17,7 +17,3 @@ export function getAdjacentPosts(slug: string): { prev?: Post; next?: Post } {
   if (i === -1) return {};
   return { prev: all[i - 1], next: all[i + 1] };
 }
-
-export function getAllTags(): string[] {
-  return [...new Set(getAllPosts().flatMap((p) => p.tags))].sort();
-}
