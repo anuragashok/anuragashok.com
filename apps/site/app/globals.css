@@ -146,3 +146,8 @@ html.dark .shiki span {
 }
 .prose-custom pre:hover .copy-btn,
 .copy-btn:focus-visible { opacity: 1; }
+
+.manifest-body pre {
+  margin: 0;
+  background: transparent !important;
+}
