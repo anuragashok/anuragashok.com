@@ -20,8 +20,8 @@ export default function HomePage() {
         </p>
         <Headline profile={profile} />
         <p className="max-w-[46ch] leading-relaxed text-[var(--muted)]">
-          {years} years of it. Today I build dispatch at {profile.company} — deciding, thousands of times a
-          second, which driver meets which demand. I care about automation, everything-as-code, and what
+          {years} years of it. Today I build dispatch at {profile.company}, deciding thousands of times a
+          second which driver meets which demand. I care about automation, everything-as-code, and what
           changes now that the agent writes the first draft.
         </p>
       </section>
