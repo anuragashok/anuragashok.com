@@ -59,12 +59,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <header className="mb-10">
-        <p className="mb-3 font-mono text-[0.65rem] tracking-[0.11em] text-[var(--muted)] tabular-nums">
+        <p className="mb-3 font-mono text-[0.75rem] tracking-[0.11em] text-[var(--muted)] tabular-nums">
           {formatDateLong(post.date)}
           {" · "}
           {post.metadata.readingTime} MIN READ
         </p>
-        <h1 className="font-serif text-4xl leading-[1.1] tracking-tight">{post.title}</h1>
+        <h1 className="font-serif text-[2.75rem] leading-[1.1] tracking-tight">{post.title}</h1>
       </header>
 
       {showToc && <TableOfContents toc={post.toc} />}

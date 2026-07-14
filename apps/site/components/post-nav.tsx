@@ -10,7 +10,7 @@ export function PostNav({ prev, next }: { prev?: Post; next?: Post }) {
       <div>
         {prev && (
           <Link href={`/writing/${prev.slug}`} className="group block">
-            <span className="font-mono text-[0.6rem] tracking-[0.12em] text-[var(--muted)]">NEWER</span>
+            <span className="font-mono text-[0.7rem] tracking-[0.12em] text-[var(--muted)]">NEWER</span>
             <span className="mt-1 block text-sm group-hover:text-[var(--accent)]">{prev.title}</span>
           </Link>
         )}
@@ -18,7 +18,7 @@ export function PostNav({ prev, next }: { prev?: Post; next?: Post }) {
       <div className="sm:text-right">
         {next && (
           <Link href={`/writing/${next.slug}`} className="group block">
-            <span className="font-mono text-[0.6rem] tracking-[0.12em] text-[var(--muted)]">OLDER</span>
+            <span className="font-mono text-[0.7rem] tracking-[0.12em] text-[var(--muted)]">OLDER</span>
             <span className="mt-1 block text-sm group-hover:text-[var(--accent)]">{next.title}</span>
           </Link>
         )}

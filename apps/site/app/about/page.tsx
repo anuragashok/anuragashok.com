@@ -30,7 +30,7 @@ export default function AboutPage() {
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <h1 className="mb-8 font-serif text-4xl tracking-tight">About</h1>
+      <h1 className="mb-8 font-serif text-[2.75rem] tracking-tight">About</h1>
 
       {/* Typographic apostrophes (’), not `&apos;`. Not only for the typography:
           SWC drops the LEADING SPACE of any JSX text chunk that both sits next to
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
       <Manifest raw={rawProfile} />
 
-      <p className="mt-3 font-mono text-[0.6rem] leading-relaxed text-[var(--muted)]">
+      <p className="mt-3 font-mono text-[0.7rem] leading-relaxed text-[var(--muted)]">
         rendered from <span className="text-[var(--accent)]">packages/profile/me.yaml</span> — the same
         object that will write my GitHub README and LinkedIn headline.
       </p>

@@ -15,7 +15,7 @@ export function Headline({ profile }: { profile: Profile }) {
   const { before, accent, after } = splitHeadline(profile);
 
   return (
-    <h1 className="mb-5 font-serif text-5xl leading-[1.05] tracking-tight">
+    <h1 className="mb-5 font-serif text-[clamp(2.75rem,2rem_+_3vw,4rem)] leading-[1.05] tracking-tight">
       {before}
       {/* `not-italic`: the serif italic face is deliberately not loaded. */}
       <em className="text-[var(--accent)] not-italic">{accent}</em>
