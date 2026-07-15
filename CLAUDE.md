@@ -3,6 +3,45 @@
 Context for agents working in this repo. Durable facts and rules — not a todo list.
 Future work lives in **GitHub issues**, not here. Design rationale lives in `docs/superpowers/specs/`.
 
+## Shipping a change — the required workflow
+
+**Follow this for every change. No exceptions, however small — a one-word copy edit goes
+through it too.** Never push to `main` directly, and **never merge without Anurag's explicit
+confirmation.**
+
+1. **Build and test locally, with Playwright.** Not just `pnpm check` — run the real thing:
+   ```
+   pnpm check          # typecheck + lint + unit
+   pnpm test:e2e       # Playwright against a production build
+   ```
+   If the change has any visual or runtime surface, **look at it in a browser** as well.
+   On this repo that is not optional ceremony: six real bugs have shipped past a fully green
+   suite and were caught only by looking at the running page (a build that failed only on a
+   clean clone, every post image 404ing from the optimizer, *zero syntax highlighting in light
+   mode*, JSX and satori silently eating spaces, a lazy-loaded LCP hero, and CI that had never
+   once worked). **Green tests here prove less than they appear to.**
+
+2. **Branch, then open a PR.** Never commit to `main`. The PR automatically gets a Vercel
+   preview deployment and a CI run.
+
+3. **Test the preview deployment**, not just the local build. Vercel Authentication is
+   **disabled for previews**, so preview URLs open directly — plain `curl` and a browser both
+   work, no bypass needed. (A protection-bypass secret also exists on the project for
+   automation; `vercel curl <path> --deployment <url>` uses it if protection is ever
+   re-enabled.) Confirm CI and the Vercel check are both green: `gh pr checks <n>`.
+
+   Get the preview URL for the current branch with:
+   ```
+   vercel api "/v6/deployments?projectId=<id>&limit=5"   # match on meta.githubCommitRef
+   ```
+
+4. **Give Anurag the preview URL, and stop.** Report what changed and what you verified.
+   **Wait for his explicit confirmation.** Do not merge on your own judgment.
+
+5. **On his go-ahead: merge to `main`** (production deploys automatically) **and verify in
+   production** on `https://anuragashok.com` — the real domain, not the `.vercel.app` alias.
+   Report what you actually observed live.
+
 ## What this repo is
 
 **Everything-as-code, applied to a person.** It is the canonical, version-controlled source of
