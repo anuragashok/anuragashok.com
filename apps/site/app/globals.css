@@ -43,6 +43,11 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
+  font-size: 1.125rem; /* 18px. The type-scale bump: 16px read as small at a
+    1800px viewport with a 672px column. This is the base every unstyled
+    descendant (prose paragraphs, the home/about copy) inherits; elements with
+    their own explicit Tailwind text-* size are unaffected, since Tailwind's
+    scale is rem-based off the ROOT (html) font-size, not this element's. */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -108,13 +113,13 @@ html.dark .shiki span {
   margin: 2.25rem 0 0.75rem;
   scroll-margin-top: 2rem;
 }
-.prose-custom h2 { font-size: 1.35rem; }
-.prose-custom h3 { font-size: 1.1rem; }
+.prose-custom h2 { font-size: 1.5rem; }
+.prose-custom h3 { font-size: 1.25rem; }
 .prose-custom h2 a,
 .prose-custom h3 a { color: inherit; text-decoration: none; }
 .prose-custom h6 {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--muted);
   margin: 1.25rem 0 0.35rem;
 }
@@ -143,7 +148,7 @@ html.dark .shiki span {
 }
 .prose-custom pre {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   line-height: 1.65;
   padding: 1rem;
   border-radius: 6px;
@@ -157,7 +162,7 @@ html.dark .shiki span {
   top: 0.5rem;
   right: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   color: var(--muted);
   background: var(--bg);
   border: 1px solid var(--rule);

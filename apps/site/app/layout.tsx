@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeScript />
       </head>
       <body>
-        <div className="mx-auto min-h-screen max-w-2xl px-6">
+        <div className="mx-auto min-h-screen max-w-3xl px-6">
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />

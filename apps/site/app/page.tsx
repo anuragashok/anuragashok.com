@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <div>
       <section className="pb-16">
-        <p className="mb-4 font-mono text-[0.65rem] tracking-[0.11em] text-[var(--muted)]">
+        <p className="mb-4 font-mono text-[0.75rem] tracking-[0.11em] text-[var(--muted)]">
           {profile.role.toUpperCase()} · {profile.company.toUpperCase()} · {profile.location.toUpperCase()}
         </p>
         <Headline profile={profile} />
@@ -27,7 +27,7 @@ export default function HomePage() {
       </section>
 
       <section>
-        <h2 className="mb-3 font-mono text-[0.65rem] tracking-[0.14em] text-[var(--muted)]">WRITING</h2>
+        <h2 className="mb-3 font-mono text-[0.75rem] tracking-[0.14em] text-[var(--muted)]">WRITING</h2>
         <PostList posts={posts} />
         <Link href="/writing" className="mt-5 inline-block font-mono text-xs text-[var(--accent)] hover:underline">
           all writing →
