@@ -22,7 +22,7 @@ export const dynamic = "force-static";
 export default function WritingPage() {
   return (
     <div>
-      <h1 className="mb-8 font-serif text-[2.75rem] tracking-tight">Writing</h1>
+      <h1 className="mb-8 font-serif text-[length:var(--text-h1)] tracking-tight">Writing</h1>
       <PostList posts={getAllPosts()} />
     </div>
   );

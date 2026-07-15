@@ -14,13 +14,13 @@ export async function Manifest({ raw }: { raw: string }) {
 
   return (
     <figure className="mt-6 overflow-hidden rounded-md border border-[var(--rule)]">
-      <figcaption className="flex items-center justify-between border-b border-[var(--rule)] px-3 py-1.5 font-mono text-[0.7rem] tracking-[0.06em] text-[var(--muted)]">
+      <figcaption className="flex items-center justify-between border-b border-[var(--rule)] px-3 py-1.5 font-mono text-[length:var(--text-meta)] tracking-[0.06em] text-[var(--muted)]">
         <span>me.yaml</span>
         <span className="text-[var(--accent)]">source of truth</span>
       </figcaption>
       <div
         data-testid="manifest"
-        className="manifest-body overflow-x-auto p-3 font-mono text-[0.8rem] leading-[1.9]"
+        className="manifest-body overflow-x-auto p-3 font-mono text-[length:var(--text-code)] leading-[1.9]"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </figure>

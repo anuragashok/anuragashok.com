@@ -46,7 +46,7 @@ test("about derives its prose from me.yaml, not from hand-typed copy", async ({ 
   // SWC drops the leading space of a JSX text chunk that sits next to an
   // expression AND contains an HTML entity, which shipped "Fulfillment Dispatch—
   // the system" and "13years in" to the page. Nothing failed; it just read wrong.
-  const prose = await page.locator("main div.max-w-\\[52ch\\]").innerText();
+  const prose = await page.getByTestId("about-prose").innerText();
   expect(prose).toContain(`on ${profile.team} — the system`);
   expect(prose).toMatch(/\d+ years in, that/);
   expect(prose).not.toMatch(/\S—/); // no word jammed against an em dash

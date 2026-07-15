@@ -25,7 +25,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeScript />
       </head>
       <body>
-        <div className="mx-auto min-h-screen max-w-3xl px-6">
+        {/* The page frame IS the reading measure plus its two gutters (--frame),
+            so header, headings, prose and footer all share one column edge.
+            px uses the same fluid --gutter, so content lands at exactly --measure. */}
+        <div className="mx-auto min-h-screen max-w-[var(--frame)] px-[var(--gutter)]">
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />
