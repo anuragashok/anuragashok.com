@@ -29,6 +29,53 @@
   --muted: var(--color-muted);
   --accent: var(--color-accent);
   --rule: var(--color-rule);
+
+  /* ── Fluid type scale ──────────────────────────────────────────────────────
+     Two ideas, no media queries.
+
+     1. HOLD THE MEASURE, NOT THE SIZE. The reading column is expressed in `ch`
+        (character widths of Inter's "0"), not pixels — so it literally is "N
+        characters wide" and self-corrects the instant the font size changes.
+        `--measure` lands the post/about reading column at ~66 chars on desktop;
+        below that width the viewport (minus `--gutter`) becomes the limiter and
+        the line naturally shortens — no phone patch required. `--frame` is the
+        page container: exactly the measure plus its two gutters, so header,
+        headings, prose and footer share one left/right edge.
+
+     2. MAKE THE SIZE FLUID. Every step is `clamp(min, preferred, max)` in `rem`
+        keyed to the viewport, so sizes scale continuously between a phone floor
+        and a laptop ceiling instead of jumping at breakpoints. `rem` (not `px`)
+        keeps the whole scale anchored to the user's root font size — an
+        accessibility win. The `+ Nvw` term is what makes it fluid; the clamp
+        rails stop it before it gets silly at either extreme.
+
+        step        phone → laptop      used by
+        ----        --------------      -------
+        --text-body   16 → 18px         body copy, prose paragraphs, bio, about
+        --text-hero   44 → 64px         home headline (the one showpiece)
+        --text-h1     36 → 44px         page / post <h1>
+        --text-h2     21.6 → 24px       .prose-custom h2
+        --text-h3     18.4 → 20px       .prose-custom h3
+        --text-meta   11.5 → 12.5px     mono eyebrows, dates, labels
+        --text-code   12.8 → 14.4px     code blocks, the me.yaml manifest
+        --gutter      20 → 32px         page side padding
+     ─────────────────────────────────────────────────────────────────────── */
+  --text-body: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --text-hero: clamp(2.75rem, 2rem + 3vw, 4rem);
+  --text-h1: clamp(2.25rem, 1.85rem + 1.7vw, 2.75rem);
+  --text-h2: clamp(1.35rem, 1.25rem + 0.45vw, 1.5rem);
+  --text-h3: clamp(1.15rem, 1.08rem + 0.3vw, 1.25rem);
+  --text-meta: clamp(0.72rem, 0.69rem + 0.13vw, 0.78rem);
+  --text-code: clamp(0.8rem, 0.72rem + 0.3vw, 0.9rem);
+
+  --gutter: clamp(1.25rem, 0.9rem + 1.4vw, 2rem);
+
+  /* The reading measure and the page frame that wraps it. Tune --measure by
+     MEASURING chars/line, not by eye: `ch` overshoots real character count
+     (Inter's "0" is wider than the average prose glyph), so this sits below 66. */
+  --measure: 48ch; /* measured: lands ~66 chars/line on desktop, ~46 on phone */
+  --measure-intro: 38ch; /* the home bio: a deliberately shorter, punchier intro */
+  --frame: calc(var(--measure) + 2 * var(--gutter));
 }
 
 .dark {
@@ -43,11 +90,12 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
-  font-size: 1.125rem; /* 18px. The type-scale bump: 16px read as small at a
-    1800px viewport with a 672px column. This is the base every unstyled
-    descendant (prose paragraphs, the home/about copy) inherits; elements with
-    their own explicit Tailwind text-* size are unaffected, since Tailwind's
-    scale is rem-based off the ROOT (html) font-size, not this element's. */
+  font-size: var(--text-body); /* Fluid 16→18px (see --text-body). This is the
+    base every unstyled descendant (prose paragraphs, the home/about copy)
+    inherits; elements with their own explicit Tailwind text-* size are
+    unaffected, since Tailwind's scale is rem-based off the ROOT (html)
+    font-size, not this element's. Because the measure below is in `ch`, this
+    element's font size is also what sizes the reading column. */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -98,6 +146,11 @@ html.dark .shiki span {
 /* Editorial prose. Hand-rolled — no @tailwindcss/typography, whose defaults
    pull toward exactly the templated look this rebuild exists to escape. */
 .prose-custom {
+  /* The post reading column: N characters wide, self-correcting with the fluid
+     body size. Redundant with --frame today (they resolve equal) but explicit,
+     so the measure survives any later change to the page container. Code blocks
+     and the manifest scroll INTERNALLY within this width, never past it. */
+  max-width: var(--measure);
   line-height: 1.75;
 }
 .prose-custom p,
@@ -113,13 +166,13 @@ html.dark .shiki span {
   margin: 2.25rem 0 0.75rem;
   scroll-margin-top: 2rem;
 }
-.prose-custom h2 { font-size: 1.5rem; }
-.prose-custom h3 { font-size: 1.25rem; }
+.prose-custom h2 { font-size: var(--text-h2); }
+.prose-custom h3 { font-size: var(--text-h3); }
 .prose-custom h2 a,
 .prose-custom h3 a { color: inherit; text-decoration: none; }
 .prose-custom h6 {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: var(--text-meta);
   color: var(--muted);
   margin: 1.25rem 0 0.35rem;
 }
@@ -148,7 +201,7 @@ html.dark .shiki span {
 }
 .prose-custom pre {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: var(--text-code);
   line-height: 1.65;
   padding: 1rem;
   border-radius: 6px;

@@ -16,7 +16,7 @@ function TocList({ items, nested = false }: { items: TocEntry[]; nested?: boolea
     <ul className={nested ? "mt-1 space-y-1 pl-4" : "space-y-1"}>
       {items.map((item) => (
         <li key={item.url}>
-          <a href={item.url} className="font-mono text-[0.8rem] text-[var(--muted)] hover:text-[var(--accent)]">
+          <a href={item.url} className="font-mono text-[length:var(--text-meta)] text-[var(--muted)] hover:text-[var(--accent)]">
             {item.title}
           </a>
           {item.items && item.items.length > 0 && <TocList items={item.items} nested />}
@@ -30,7 +30,7 @@ function TocList({ items, nested = false }: { items: TocEntry[]; nested?: boolea
 export function TableOfContents({ toc }: { toc: Post["toc"] }) {
   return (
     <nav aria-label="Table of contents" className="mb-10 border-l border-[var(--rule)] pl-4">
-      <p className="mb-2 font-mono text-[0.7rem] tracking-[0.14em] text-[var(--muted)]">CONTENTS</p>
+      <p className="mb-2 font-mono text-[length:var(--text-meta)] tracking-[0.14em] text-[var(--muted)]">CONTENTS</p>
       <TocList items={toc} />
     </nav>
   );

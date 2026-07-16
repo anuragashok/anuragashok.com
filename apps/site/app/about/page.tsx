@@ -30,7 +30,7 @@ export default function AboutPage() {
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <h1 className="mb-8 font-serif text-[2.75rem] tracking-tight">About</h1>
+      <h1 className="mb-8 font-serif text-[length:var(--text-h1)] tracking-tight">About</h1>
 
       {/* Typographic apostrophes (’), not `&apos;`. Not only for the typography:
           SWC drops the LEADING SPACE of any JSX text chunk that both sits next to
@@ -38,7 +38,7 @@ export default function AboutPage() {
           "Fulfillment Dispatch— the system" and "13years in" on this page. Home,
           with the same JSX shape but no entities, was unaffected, which is what
           made it easy to miss. Keep entities out of JSX text here. */}
-      <div className="max-w-[52ch] space-y-4 leading-relaxed">
+      <div data-testid="about-prose" className="max-w-[var(--measure)] space-y-4 leading-relaxed">
         <p>
           I’m a {profile.role} at {profile.company} in {profile.location}, on {profile.team} — the system
           that matches supply to demand across Southeast Asia. I’ve been writing software since{" "}
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
       <Manifest raw={rawProfile} />
 
-      <p className="mt-3 font-mono text-[0.7rem] leading-relaxed text-[var(--muted)]">
+      <p className="mt-3 font-mono text-[length:var(--text-meta)] leading-relaxed text-[var(--muted)]">
         rendered from <span className="text-[var(--accent)]">packages/profile/me.yaml</span> — the same
         object that will write my GitHub README and LinkedIn headline.
       </p>
