@@ -179,6 +179,16 @@ test fails if the two drift. Edit `tokens.ts`, then make the CSS agree.
   month or a year — on any machine west of UTC. See `lib/format-date.ts`.
 - **Shiki runs at BUILD time**, in velite (posts) and in the `Manifest` server component
   (`me.yaml`). No runtime highlighter ships. Keep it that way.
+- **Tailwind v4: `text-[var(--x)]` compiles to `color`, not `font-size`.** A bare CSS
+  variable in an arbitrary `text-[…]` value is ambiguous, and Tailwind resolves it to the
+  colour utility — so headings silently render at body size with no error. Write
+  `text-[length:var(--x)]` when the variable is a size. This bit us during the fluid-type
+  refactor; check the compiled CSS if a size ever "doesn't take."
+- **The type scale is FLUID — don't re-fix it.** Sizes are `clamp()` steps in `rem`
+  (custom properties in `globals.css`), and the reading column is set in `ch` so the
+  measure (~66 chars desktop, ~46 phone) self-corrects at every width with no media
+  queries. Don't reintroduce fixed `px` font sizes or a px reading column; if a width
+  looks wrong, tune the clamp or the `ch` value — never patch a breakpoint.
 ## Deploying (read before touching Vercel config)
 
 Vercel project `anuragashok-com`, scope `anuragashoks-projects`. **Root Directory is
