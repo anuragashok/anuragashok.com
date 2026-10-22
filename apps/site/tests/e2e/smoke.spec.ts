@@ -174,6 +174,18 @@ test("feed, sitemap and robots are served", async ({ request }) => {
   expect((await request.get("/robots.txt")).status()).toBe(200);
 });
 
+test("privacy policy is served and linked from the footer", async ({ page }) => {
+  const res = await page.goto("/privacy");
+  expect(res?.status()).toBe(200);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Privacy");
+  await expect(page.getByTestId("privacy-prose")).toContainText("ClaudeCode");
+  await expect(page.getByRole("link", { name: "myaccount.google.com/permissions" })).toHaveAttribute(
+    "href",
+    "https://myaccount.google.com/permissions",
+  );
+  await expect(page.locator("footer").getByRole("link", { name: "Privacy" })).toHaveAttribute("href", "/privacy");
+});
+
 test("404 renders", async ({ page }) => {
   const res = await page.goto("/writing/does-not-exist");
   expect(res?.status()).toBe(404);
