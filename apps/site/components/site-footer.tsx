@@ -9,6 +9,7 @@ export function SiteFooter() {
           <a href={siteConfig.links.github} className="hover:text-[var(--accent)]">GitHub</a>
           <a href={siteConfig.links.linkedin} className="hover:text-[var(--accent)]">LinkedIn</a>
           <a href="/feed.xml" className="hover:text-[var(--accent)]">RSS</a>
+          <a href="/privacy" className="hover:text-[var(--accent)]">Privacy</a>
         </div>
       </div>
     </footer>

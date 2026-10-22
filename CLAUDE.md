@@ -102,8 +102,9 @@ Airlines era, "8+ years." **Do not reuse it.** `packages/profile/me.yaml` is aut
 
 ## Surfaces
 
-`/` · `/writing` · `/writing/[slug]` · `/about` · `feed.xml` · `sitemap.xml` · `robots.txt` ·
-OG images · 404. **That's the whole site.**
+`/` · `/writing` · `/writing/[slug]` · `/about` · `/privacy` · `feed.xml` · `sitemap.xml` · `robots.txt` ·
+OG images · 404. **That's the whole site.** (`/privacy` exists only because Google requires a
+policy URL to publish his personal `ClaudeCode` OAuth app; it is not a content page.)
 
 No projects page, no `/now`, no `/uses`. The previous version of this site died of unkept
 pages. Adding a surface means committing to keeping it alive — get it asked for explicitly.
@@ -149,7 +150,7 @@ links and guids, sitemap, robots' sitemap pointer, canonicals, JSON-LD, OG `meta
 derives from it, and a silent `localhost` fallback fails nothing while publishing garbage.
 Dev falls back to localhost. See `.env.example`.
 
-**Every page carries `export const dynamic = "force-static"`.** All four pages, plus
+**Every page carries `export const dynamic = "force-static"`.** All five pages, plus
 `robots.ts`, `sitemap.ts`, `feed.xml/route.ts`. The whole site is static; the directive is
 the guard, so that reading a header or a cookie fails the build instead of quietly turning
 a page into a server render.
